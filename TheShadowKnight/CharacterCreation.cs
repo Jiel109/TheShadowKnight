@@ -1,6 +1,86 @@
 ﻿using System;
 using TheShadowKnight;
 
+ public struct charInfo
+ {
+     public string PlayerName, PlayerRace, PlayerGender, PlayerHairStyle, PlayerHairColor, PlayerEyeColor, PlayerSkinTone, PlayerMass, PlayerClass, PlayerElement, PlayerFaction;
+     public int Str, Agi, Int, Dex, Luck;
+     public bool Moustache, Beard, Goatee, Headband, Earrings,
+         Necklace, Ring;
+
+     public void setInfo(string PN, string PR, string PG, string PHS, string PHC, string PEC, string PST, string PM, string PC, string PE, string PF)
+     {
+         this.PlayerName = PN;
+         this.PlayerRace = PR;
+         this.PlayerGender = PG;
+         this.PlayerHairStyle = PHS;
+         this.PlayerHairColor = PHC;
+         this.PlayerEyeColor = PEC;
+         this.PlayerSkinTone = PST;
+         this.PlayerMass = PM;
+         this.PlayerClass = PC;
+         this.PlayerElement = PE;
+         this.PlayerFaction = PF;
+     }
+
+     public void showInfo()
+     {
+         Console.WriteLine("   Character Name: " + this.PlayerName);
+         Console.WriteLine("   Character Race: " + this.PlayerRace);
+         Console.WriteLine("   Character Gender: " + this.PlayerGender);
+         Console.WriteLine("   Character Hair Style: " + this.PlayerHairStyle);
+         Console.WriteLine("   Character Hair Color: " + this.PlayerHairColor);
+         Console.WriteLine("   Character Eye Color: " + this.PlayerEyeColor);
+         Console.WriteLine("   Character Skin Tone: " + this.PlayerSkinTone);
+         Console.WriteLine("   Character Mass: " + this.PlayerMass);
+         Console.WriteLine("   Character Class: " + this.PlayerClass);
+         Console.WriteLine("   Character Element: " + this.PlayerElement);
+         Console.WriteLine("   Character Faction: " + this.PlayerFaction);
+     }
+
+     public void setInfo(int strength, int agility, int intelligence, int dexterity, int luck)
+     {
+         this.Str = strength;
+         this.Agi = agility;
+         this.Int = intelligence;
+         this.Dex = dexterity;
+         this.Luck = luck;
+     }
+
+     public void showStats()
+     {
+         Console.WriteLine("\nCharacter Stats");
+         Console.WriteLine("   Character Strength: " + this.Str);
+         Console.WriteLine("   Character Agility: " + this.Agi);
+         Console.WriteLine("   Character Intelligence: " + this.Int);
+         Console.WriteLine("   Character Dexterity: " + this.Dex);
+         Console.WriteLine("   Character Luck: " + this.Luck);
+     }
+
+     public void setInfo(bool moustache, bool beard, bool goatee, bool headband, bool earrings, bool necklace, bool ring)
+     {
+         this.Moustache = moustache;
+         this.Beard = beard;
+         this.Goatee = goatee;
+         this.Headband = headband;
+         this.Earrings = earrings;
+         this.Necklace = necklace;
+         this.Ring = ring;
+     }
+
+     public void showAdditionals()
+     {
+         Console.WriteLine("\nCharacter Additional Features");
+         Console.WriteLine("   Character Moustache: " + Moustache);
+         Console.WriteLine("   Character Beard: " + Beard);
+         Console.WriteLine("   Character Goatee: " + Goatee);
+         Console.WriteLine("   Character Headband: " + Headband);
+         Console.WriteLine("   Character Earrings: " + Earrings);
+         Console.WriteLine("   Character Necklace: " + Necklace);
+         Console.WriteLine("   Character Ring: " + Ring);
+     }
+ }
+
 public class CharacterCreation
 {
     static String ans, charName, charRace, charGender, hairStyle, hairColor,
@@ -10,12 +90,14 @@ public class CharacterCreation
     hasNecklace = false, hasRing = false;
     public static void Character()
     {
+        charInfo Player = new charInfo();
+    
         Console.WriteLine("CREATE A NEW CHARACTER");
-        while (true)
+        while(true)
         {
             Console.Write("Enter Character Name[Max of 20 characters]: ");
             charName = Console.ReadLine();
-            if (charName.Length <= 20)
+            if(charName.Length <= 20)
             {
                 break;
             }
@@ -25,8 +107,8 @@ public class CharacterCreation
                 continue;
             }
         }
-
-        while (true)
+    
+        while(true)
         {
             Console.WriteLine("Character Race");
             Console.WriteLine("[1] Human");
@@ -74,7 +156,7 @@ public class CharacterCreation
             Console.WriteLine("[F]emale");
             Console.Write("Enter option: ");
             ans = Console.ReadLine();
-
+    
             if (ans.ToUpper().Equals("M"))
             {
                 charGender = "Male";
@@ -108,7 +190,7 @@ public class CharacterCreation
             Console.WriteLine("[12] Fringe Long");
             Console.Write("Enter option: ");
             ans = Console.ReadLine();
-
+    
             if (ans.Equals("1"))
             {
                 hairStyle = "Wavy";
@@ -175,7 +257,7 @@ public class CharacterCreation
                 continue;
             }
         }
-        while (true)
+        while(true)
         {
             Console.WriteLine("Character Hair Color");
             Console.WriteLine("[1] Black");
@@ -189,7 +271,7 @@ public class CharacterCreation
             Console.WriteLine("[9] Gray");
             Console.Write("Enter option: ");
             ans = Console.ReadLine();
-
+    
             if (ans.Equals("1"))
             {
                 hairColor = "Black";
@@ -241,7 +323,7 @@ public class CharacterCreation
                 continue;
             }
         }
-        while (true)
+        while(true)
         {
             Console.WriteLine("Character Eye Color");
             Console.WriteLine("[1] Black");
@@ -255,7 +337,7 @@ public class CharacterCreation
             Console.WriteLine("[9] Gray");
             Console.Write("Enter option: ");
             ans = Console.ReadLine();
-
+    
             if (ans.Equals("1"))
             {
                 eyeColor = "Black";
@@ -307,7 +389,7 @@ public class CharacterCreation
                 continue;
             }
         }
-        while (true)
+        while(true)
         {
             Console.WriteLine("Character Skin Tone");
             Console.WriteLine("[1] Light");
@@ -317,7 +399,7 @@ public class CharacterCreation
             Console.WriteLine("[5] Dark");
             Console.Write("Enter option: ");
             ans = Console.ReadLine();
-
+    
             if (ans.Equals("1"))
             {
                 skinTone = "Light";
@@ -349,7 +431,7 @@ public class CharacterCreation
                 continue;
             }
         }
-        while (true)
+        while(true)
         {
             Console.WriteLine("Character Mass");
             Console.WriteLine("[1] Small");
@@ -359,7 +441,7 @@ public class CharacterCreation
             Console.WriteLine("[5] Bodybuilder");
             Console.Write("Enter option: ");
             ans = Console.ReadLine();
-
+    
             if (ans.Equals("1"))
             {
                 charMass = "Small";
@@ -391,7 +473,7 @@ public class CharacterCreation
                 continue;
             }
         }
-        while (true)
+        while(true)
         {
             Console.WriteLine("Character Class");
             Console.WriteLine("[1] Warrior");
@@ -403,7 +485,7 @@ public class CharacterCreation
             Console.WriteLine("[7] Scout");
             Console.Write("Enter option: ");
             ans = Console.ReadLine();
-
+    
             if (ans.Equals("1"))
             {
                 charClass = "Warrior";
@@ -445,7 +527,7 @@ public class CharacterCreation
                 continue;
             }
         }
-        while (true)
+        while(true)
         {
             Console.WriteLine("Character Element");
             Console.WriteLine("[1] Heat");
@@ -456,7 +538,7 @@ public class CharacterCreation
             Console.WriteLine("[6] Darkness");
             Console.Write("Enter option: ");
             ans = Console.ReadLine();
-
+    
             if (ans.Equals("1"))
             {
                 charElement = "Heat";
@@ -493,7 +575,7 @@ public class CharacterCreation
                 continue;
             }
         }
-        while (true)
+        while(true)
         {
             Console.WriteLine("Character Faction");
             Console.WriteLine("[1] Knight's Order");
@@ -503,7 +585,7 @@ public class CharacterCreation
             Console.WriteLine("[5] Adventurers' Guild");
             Console.Write("Enter option: ");
             ans = Console.ReadLine();
-
+    
             if (ans.Equals("1"))
             {
                 charFaction = "Knight's Order";
@@ -535,8 +617,10 @@ public class CharacterCreation
                 continue;
             }
         }
-
-        while (maxStatsLimit > 0)
+    
+        Player.setInfo(charName, charRace, charGender, hairStyle, hairColor, eyeColor, skinTone, charMass, charClass, charElement, charFaction);
+    
+        while(maxStatsLimit > 0)
         {
             Console.WriteLine("Character Stats");
             Console.WriteLine("[1]Character Strength: " + charStr);
@@ -547,11 +631,11 @@ public class CharacterCreation
             Console.WriteLine("Remaining points to be added in stats: " + maxStatsLimit);
             Console.WriteLine("Enter option: ");
             ans = Console.ReadLine();
-            if (ans.Equals("1"))
+            if(ans.Equals("1"))
             {
                 Console.WriteLine("Add stats to Character Strength: ");
                 statsInput = Convert.ToInt32(Console.ReadLine());
-
+    
                 if (statsInput <= maxStatsLimit)
                 {
                     charStr += statsInput;
@@ -562,11 +646,11 @@ public class CharacterCreation
                     Console.WriteLine("Input exceeds remaining points to be added! Please try again.");
                 }
             }
-            else if (ans.Equals("2"))
+            else if(ans.Equals("2"))
             {
                 Console.WriteLine("Add stats to Character Agility: ");
                 statsInput = Convert.ToInt32(Console.ReadLine());
-
+    
                 if (statsInput <= maxStatsLimit)
                 {
                     charAgi += statsInput;
@@ -581,7 +665,7 @@ public class CharacterCreation
             {
                 Console.WriteLine("Add stats to Character Intelligence: ");
                 statsInput = Convert.ToInt32(Console.ReadLine());
-
+    
                 if (statsInput <= maxStatsLimit)
                 {
                     charInt += statsInput;
@@ -596,7 +680,7 @@ public class CharacterCreation
             {
                 Console.WriteLine("Add stats to Character Dexterity: ");
                 statsInput = Convert.ToInt32(Console.ReadLine());
-
+    
                 if (statsInput <= maxStatsLimit)
                 {
                     charDex += statsInput;
@@ -611,7 +695,7 @@ public class CharacterCreation
             {
                 Console.WriteLine("Add stats to Character Luck: ");
                 statsInput = Convert.ToInt32(Console.ReadLine());
-
+    
                 if (statsInput <= maxStatsLimit)
                 {
                     charLuck += statsInput;
@@ -629,7 +713,9 @@ public class CharacterCreation
             }
         }
         Console.WriteLine("You have no remaining points left to be added in Character Stats.");
-
+    
+        Player.setInfo(charStr, charAgi, charInt, charDex, charLuck);
+    
         Console.WriteLine("Character Additional Features");
         while (true)
         {
@@ -771,30 +857,11 @@ public class CharacterCreation
                 continue;
             }
         }
-        Console.WriteLine("Character has been created.");
-        Console.WriteLine("Character Name: " + charName);
-        Console.WriteLine("Character Race: " + charRace);
-        Console.WriteLine("Character Gender: " + charGender);
-        Console.WriteLine("Character Hair Color: " + hairColor);
-        Console.WriteLine("Character Eye Color: " + eyeColor);
-        Console.WriteLine("Character Skin Tone: " + skinTone);
-        Console.WriteLine("Character Mass: " + charMass);
-        Console.WriteLine("Character Class: " + charClass);
-        Console.WriteLine("Character Element: " + charElement);
-        Console.WriteLine("Character Faction: " + charFaction);
-        Console.WriteLine("Character Stats");
-        Console.WriteLine("   Character Strength: " + charStr);
-        Console.WriteLine("   Character Agility: " + charAgi);
-        Console.WriteLine("   Character Intelligence: " + charInt);
-        Console.WriteLine("   Character Dexterity: " + charDex);
-        Console.WriteLine("   Character Luck: " + charLuck);
-        Console.WriteLine("Character Additional Features");
-        Console.WriteLine("   Character Moustache: " + hasMoustache);
-        Console.WriteLine("   Character Beard: " + hasBeard);
-        Console.WriteLine("   Character Goatee: " + hasGoatee);
-        Console.WriteLine("   Character Headband: " + hasHeadband);
-        Console.WriteLine("   Character Earrings: " + hasEarrings);
-        Console.WriteLine("   Character Necklace: " + hasNecklace);
-        Console.WriteLine("   Character Ring: " + hasRing);
+        Player.setInfo(hasMoustache, hasBeard, hasGoatee, hasHeadband, hasEarrings, hasNecklace, hasRing);
+    
+        Console.WriteLine("\nCharacter has been created.");
+        Player.showInfo();
+        Player.showStats();
+        Player.showAdditionals();
     }
 }
