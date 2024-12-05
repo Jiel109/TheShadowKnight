@@ -1,5 +1,4 @@
 using System;
-
 namespace TheShadowKnight
 {
     public class MainMenu
@@ -13,7 +12,10 @@ namespace TheShadowKnight
 
                 while (true)
                 {
-                    Console.WriteLine("THE SHADOW KNIGHT\n");
+
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("                        _____\r\n                        \\   /\r\n                        |   |\r\n           .__.         |   |_____________________________________________\r\n           |  |_________|   |                                              \\\r\n           |  |         |   |________________________________________________\\\r\n _____ _            _____ _               _                 _   __      _       _     _\r\n|_   _| |          /  ___| |             | |               | | / /     (_)     | |   | |\r\n  | | | |__   ___  \\ `--.| |__   __ _  __| | _____      __ | |/ / _ __  _  __ _| |__ | |_\r\n  | | | '_ \\ / _ \\  `--. | '_ \\ / _` |/ _` |/ _ \\ \\ /\\ / / |    \\| '_ \\| |/ _` | '_ \\| __|\r\n  | | | | | |  __/ /\\__/ | | | | (_| | (_| | (_) \\ V  V /  | |\\  | | | | | (_| | | | | |_\r\n  \\_/ |_| |_|\\___| \\____/|_| |_|\\__,_|\\__,_|\\___/ \\_/\\_/   \\_| \\_|_| |_|_|\\__, |_| |_|\\__|\r\n                             _____________________________________________ __/ |\r\n           |  |_________|   |                                             |___/\r\n           |__|         |   |_____________________________________________ /\r\n                        |   |\r\n                        |   |\r\n                        /___\\\n");
+                    Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine("[1] NEW GAME");
                     Console.WriteLine("[2] LOAD GAME");
                     Console.WriteLine("[3] CAMPAIGN MODE");
@@ -35,7 +37,9 @@ namespace TheShadowKnight
                         else if (ans.ToUpper().Equals("N"))
                         {
                             Console.WriteLine("Thank you for playing the game!");
-                            break;
+                            Console.WriteLine("Exiting in 5 seconds...");
+                            Thread.Sleep(5000);
+                            System.Environment.Exit(0);
                         }
                         else
                         {
@@ -56,7 +60,9 @@ namespace TheShadowKnight
                         else if (ans.ToUpper().Equals("N"))
                         {
                             Console.WriteLine("Thank you for playing the game!");
-                            break;
+                            Console.WriteLine("Exiting in 5 seconds...");
+                            Thread.Sleep(5000);
+                            System.Environment.Exit(0);
                         }
                         else
                         {
@@ -76,7 +82,9 @@ namespace TheShadowKnight
                         else if (ans.ToUpper().Equals("N"))
                         {
                             Console.WriteLine("Thank you for playing the game!");
-                            break;
+                            Console.WriteLine("Exiting in 5 seconds...");
+                            Thread.Sleep(5000);
+                            System.Environment.Exit(0);
                         }
                         else
                         {
@@ -96,7 +104,9 @@ namespace TheShadowKnight
                         else if (ans.ToUpper().Equals("N"))
                         {
                             Console.WriteLine("Thank you for playing the game!");
-                            break;
+                            Console.WriteLine("Exiting in 5 seconds...");
+                            Thread.Sleep(5000);
+                            System.Environment.Exit(0);
                         }
                         else
                         {
@@ -107,6 +117,9 @@ namespace TheShadowKnight
                     else if (ans.Equals("5"))
                     {
                         Console.WriteLine("Thank you for playing the game!");
+                        Console.WriteLine("Exiting in 5 seconds...");
+                        Thread.Sleep(5000);
+                        System.Environment.Exit(0);
                     }
                     else if (ansint >= 6)
                     {
