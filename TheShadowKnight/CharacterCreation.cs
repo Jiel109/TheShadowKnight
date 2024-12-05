@@ -1,7 +1,108 @@
 using System;
 using TheShadowKnight;
 
- public struct charInfo
+// asbtract class 
+public abstract class BaseCharacter
+{
+    // encapsulation gumawa parin ako setters getters.. makulit ako e
+    private string name;
+    private string race;
+
+    public string Name
+    {
+        get { return name; }
+        set { name = value; }
+    }
+
+    public string Race
+    {
+        get { return race; }
+        set { race = value; }
+    }
+
+    public BaseCharacter(string name, string race)
+    {
+        this.name = name;
+        this.race = race;
+    }
+
+    // abstract method
+    public abstract void ShowInfo();
+    public abstract void ShowStats();
+}
+
+
+public class PlayerCharacter : BaseCharacter
+{
+   
+    private int strength;
+    private int agility;
+    private int intelligence;
+
+    public int Strength
+    {
+        get { return strength; }
+        set { strength = value >= 0 ? value : 0; }
+    }
+
+    public int Agility
+    {
+        get { return agility; }
+        set { agility = value >= 0 ? value : 0; }
+    }
+
+    public int Intelligence
+    {
+        get { return intelligence; }
+        set { intelligence = value >= 0 ? value : 0; }
+    }
+
+    public PlayerCharacter(string name, string race, int str, int agi, int intel) : base(name, race)
+    {
+        Strength = str;
+        Agility = agi;
+        Intelligence = intel;
+    }
+
+    //  abstract method ulit
+    public override void ShowInfo()
+    {
+        Console.WriteLine($"Name: {Name}, Race: {Race}");
+    }
+
+    public override void ShowStats()
+    {
+        Console.WriteLine($"Strength: {Strength}, Agility: {Agility}, Intelligence: {Intelligence}");
+    }
+}
+
+// polymorphism
+public class CharacterCreator
+{
+    public void CreateCharacter()
+    {
+        Console.WriteLine("Enter Name: ");
+        string name = Console.ReadLine();
+
+        Console.WriteLine("Enter Race: ");
+        string race = Console.ReadLine();
+
+        // example stats 
+        int strength = 10;
+        int agility = 15;
+        int intelligence = 8;
+
+        // instantiate a playercharacter
+        BaseCharacter player = new PlayerCharacter(name, race, strength, agility, intelligence);
+
+        // Polymorphic behavior
+        Console.WriteLine("\nCharacter Details:");
+        player.ShowInfo();
+        player.ShowStats();
+    }
+}
+
+public struct charInfo
  {
      public string PlayerName, PlayerRace, PlayerGender, PlayerHairStyle, PlayerHairColor, PlayerEyeColor, PlayerSkinTone, PlayerMass, PlayerClass, PlayerElement, PlayerFaction;
      public int Str, Agi, Int, Dex, Luck;
@@ -38,14 +139,14 @@ using TheShadowKnight;
          Console.WriteLine("   Character Faction: " + this.PlayerFaction);
      }
 
-     public void setInfo(int strength, int agility, int intelligence, int dexterity, int luck)
-     {
-         this.Str = strength;
-         this.Agi = agility;
-         this.Int = intelligence;
-         this.Dex = dexterity;
-         this.Luck = luck;
-     }
+    public void setInfo(int strength, int agility, int intelligence, int dexterity, int luck)
+    {
+        this.Str = strength;
+        this.Agi = agility;
+        this.Int = intelligence;
+        this.Dex = dexterity;
+        this.Luck = luck;
+    }
 
      public void showStats()
      {
