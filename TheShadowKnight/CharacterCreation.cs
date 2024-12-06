@@ -4,7 +4,7 @@ namespace TheShadowKnight
     // abstract class 
     public abstract class BaseCharacter
     {
-        // encapsulation gumawa parin ako setters getters.. makulit ako e
+        // encapsulation with setters and getters
         private string name;
         private string race;
 
@@ -31,13 +31,15 @@ namespace TheShadowKnight
         public abstract void ShowStats();
     }
 
-
+    // Polymorphism
     public class PlayerCharacter : BaseCharacter
     {
 
         private int strength;
         private int agility;
         private int intelligence;
+        private int dexterity;
+        private int luck;
 
         public int Strength
         {
@@ -56,23 +58,36 @@ namespace TheShadowKnight
             get { return intelligence; }
             set { intelligence = value >= 0 ? value : 0; }
         }
+        public int Dexterity
+        {
+            get { return dexterity; }
+            set { dexterity = value >= 0 ? value : 0; }
+        }
+        public int Luck
+        {
+            get { return luck; }
+            set { luck = value >= 0 ? value : 0; }
+        }
 
-        public PlayerCharacter(string name, string race, int str, int agi, int intel) : base(name, race)
+        public PlayerCharacter(string name, string race, int str, int agi, int intel, int dex, int luck) : base(name, race)
         {
             Strength = str;
             Agility = agi;
             Intelligence = intel;
+            Dexterity = dex;
+            Luck = luck;
+
         }
 
-        //  abstract method ulit
+        //  method overriding
         public override void ShowInfo()
         {
-            Console.WriteLine($"Name: {Name}, Race: {Race}");
+            Console.WriteLine("Name: " + Name + "Race: " + Race);
         }
-
+        // method overriding
         public override void ShowStats()
         {
-            Console.WriteLine($"Strength: {Strength}, Agility: {Agility}, Intelligence: {Intelligence}");
+            Console.WriteLine("Strength: " + Strength +  " Agility: " + Agility + "Intelligence: " + Intelligence + "Dexterity: " + Dexterity + "Luck: " + Luck);
         }
     }
 
@@ -91,9 +106,12 @@ namespace TheShadowKnight
             int strength = 10;
             int agility = 15;
             int intelligence = 8;
+            int dexterity = 9;
+            int luck = 8;
 
-            // instantiate a playercharacter
-            BaseCharacter player = new PlayerCharacter(name, race, strength, agility, intelligence);
+
+            // instantiate a player character
+            BaseCharacter player = new PlayerCharacter(name, race, strength, agility, intelligence, dexterity, luck);
 
             // Polymorphic behavior
             Console.WriteLine("\nCharacter Details:");
@@ -101,14 +119,14 @@ namespace TheShadowKnight
             player.ShowStats();
         }
     }
-
+    // struct and inheritance from interface
     public struct charInfo : ICharacterCreation
     {
-        public string PlayerName, PlayerRace, PlayerGender, PlayerHairStyle, PlayerHairColor, PlayerEyeColor, PlayerSkinTone, PlayerMass, PlayerClass, PlayerElement, PlayerFaction;
-        public int Str, Agi, Int, Dex, Luck;
-        public bool Moustache, Beard, Goatee, Headband, Earrings,
+        private string PlayerName, PlayerRace, PlayerGender, PlayerHairStyle, PlayerHairColor, PlayerEyeColor, PlayerSkinTone, PlayerMass, PlayerClass, PlayerElement, PlayerFaction;
+        private int Str, Agi, Int, Dex, Luck;
+        private bool Moustache, Beard, Goatee, Headband, Earrings,
             Necklace, Ring;
-
+        // method overloading and inheritance of method from the interface
         public void setInfo(string PN, string PR, string PG, string PHS, string PHC, string PEC, string PST, string PM, string PC, string PE, string PF)
         {
             this.PlayerName = PN;
@@ -138,7 +156,7 @@ namespace TheShadowKnight
             Console.WriteLine("   Character Element: " + this.PlayerElement);
             Console.WriteLine("   Character Faction: " + this.PlayerFaction);
         }
-
+        // method overloading and inheritance of method from the interface
         public void setInfo(int strength, int agility, int intelligence, int dexterity, int luck)
         {
             this.Str = strength;
@@ -157,7 +175,7 @@ namespace TheShadowKnight
             Console.WriteLine("   Character Dexterity: " + this.Dex);
             Console.WriteLine("   Character Luck: " + this.Luck);
         }
-
+        // method overloading and inheritance of method from the interface
         public void setInfo(bool moustache, bool beard, bool goatee, bool headband, bool earrings, bool necklace, bool ring)
         {
             this.Moustache = moustache;
