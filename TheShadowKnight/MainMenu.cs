@@ -4,7 +4,7 @@ namespace TheShadowKnight
     public class MainMenu
     {
         static String ans;
-        static int ansint;
+        static int ansInt;
         public static void Main(String[] args)
         {
             try
@@ -23,7 +23,7 @@ namespace TheShadowKnight
                     Console.WriteLine("[5] EXIT");
                     Console.Write("Enter option: ");
                     ans = Console.ReadLine();
-                    ansint = Convert.ToInt32(ans);
+                    ansInt = Convert.ToInt32(ans);
 
                     if (ans.Equals("1"))
                     {
@@ -50,7 +50,7 @@ namespace TheShadowKnight
                     }
                     else if (ans.Equals("2"))
                     {
-                        Console.WriteLine("Load game feature still in development. To be implemented in the future.");
+                        LoadGame.LoadCharacter();
                         Console.WriteLine("\nReturn to Main Menu? [Y/N]");
                         ans = Console.ReadLine();
                         if (ans.ToUpper().Equals("Y"))
@@ -121,7 +121,7 @@ namespace TheShadowKnight
                         Thread.Sleep(5000);
                         System.Environment.Exit(0);
                     }
-                    else if (ansint >= 6)
+                    else if (ansInt >= 6)
                     {
                         Console.WriteLine("Invalid option! Please try again.");
                         continue;

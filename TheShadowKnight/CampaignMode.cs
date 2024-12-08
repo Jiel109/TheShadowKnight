@@ -4,10 +4,10 @@ namespace TheShadowKnight
 
     public class CampaignMode
     {
-        static string ans;
+        static String ans;
         public static void Campaign()
         {
-            Console.WriteLine("CAMPAIGN MODE");
+            Console.WriteLine("\nCAMPAIGN MODE");
             Console.WriteLine("\nTHE KINGDOM OF VELMIRIS");
             Console.WriteLine("Velmiris is a kingdom that once enjoyed peace and prosperity with happy people living in harmony under great and noble rulers. " +
                 "Now, those times are long gone. Once-protective noble families have become corrupt and selfish, turning their backs on the needs of the kingdom. " +

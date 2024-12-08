@@ -1,26 +1,28 @@
 using System;
+using System.Data.SqlClient;
+
 namespace TheShadowKnight
 {
     // abstract class 
     public abstract class BaseCharacter
     {
         // encapsulation with setters and getters
-        private string name;
-        private string race;
+        private String name;
+        private String race;
 
-        public string Name
+        public String Name
         {
             get { return name; }
             set { name = value; }
         }
 
-        public string Race
+        public String Race
         {
             get { return race; }
             set { race = value; }
         }
 
-        public BaseCharacter(string name, string race)
+        public BaseCharacter(String name, String race)
         {
             this.name = name;
             this.race = race;
@@ -69,7 +71,7 @@ namespace TheShadowKnight
             set { luck = value >= 0 ? value : 0; }
         }
 
-        public PlayerCharacter(string name, string race, int str, int agi, int intel, int dex, int luck) : base(name, race)
+        public PlayerCharacter(String name, String race, int str, int agi, int intel, int dex, int luck) : base(name, race)
         {
             Strength = str;
             Agility = agi;
@@ -97,10 +99,10 @@ namespace TheShadowKnight
         public void CreateCharacter()
         {
             Console.WriteLine("Enter Name: ");
-            string name = Console.ReadLine();
+            String name = Console.ReadLine();
 
             Console.WriteLine("Enter Race: ");
-            string race = Console.ReadLine();
+            String race = Console.ReadLine();
 
             // example stats 
             int strength = 10;
@@ -120,14 +122,14 @@ namespace TheShadowKnight
         }
     }
     // struct and inheritance from interface
-    public struct charInfo : ICharacterCreation
+    public struct CharInfo : ICharacterCreation
     {
-        private string PlayerName, PlayerRace, PlayerGender, PlayerHairStyle, PlayerHairColor, PlayerEyeColor, PlayerSkinTone, PlayerMass, PlayerClass, PlayerElement, PlayerFaction;
+        private String PlayerName, PlayerRace, PlayerGender, PlayerHairStyle, PlayerHairColor, PlayerEyeColor, PlayerSkinTone, PlayerMass, PlayerClass, PlayerElement, PlayerFaction;
         private int Str, Agi, Int, Dex, Luck;
         private bool Moustache, Beard, Goatee, Headband, Earrings,
             Necklace, Ring;
         // method overloading and inheritance of method from the interface
-        public void setInfo(string PN, string PR, string PG, string PHS, string PHC, string PEC, string PST, string PM, string PC, string PE, string PF)
+        public void setInfo(String PN, String PR, String PG, String PHS, String PHC, String PEC, String PST, String PM, String PC, String PE, String PF)
         {
             this.PlayerName = PN;
             this.PlayerRace = PR;
@@ -204,14 +206,14 @@ namespace TheShadowKnight
     {
         static String ans, charName, charRace, charGender, hairStyle, hairColor,
         eyeColor, skinTone, charMass, charClass, charElement, charFaction;
-        static int statsInput, maxStatsLimit = 50, charStr = 1, charAgi = 1, charInt = 1, charDex = 1, charLuck = 1, ansint = 0;
+        static int ansInt, statsInput, maxStatsLimit = 50, charStr = 1, charAgi = 1, charInt = 1, charDex = 1, charLuck = 1, ansint = 0;
         static bool hasMoustache = false, hasBeard = false, hasGoatee = false, hasHeadband = false, hasEarrings = false,
         hasNecklace = false, hasRing = false;
         public static void Character()
         {
-            charInfo Player = new charInfo();
+            CharInfo Player = new CharInfo();
 
-            Console.WriteLine("CREATE A NEW CHARACTER");
+            Console.WriteLine("\nCREATE A NEW CHARACTER");
             try
             {
                 while (true)
@@ -239,6 +241,8 @@ namespace TheShadowKnight
                     Console.WriteLine("[5] Beastman");
                     Console.Write("Enter option: ");
                     ans = Console.ReadLine();
+                    ansInt = Convert.ToInt32(ans);
+
                     if (ans.Equals("1"))
                     {
                         charRace = "Human";
@@ -264,10 +268,14 @@ namespace TheShadowKnight
                         charRace = "Beastman";
                         break;
                     }
-                    else
+                    else if (ansInt >= 6)
                     {
                         Console.WriteLine("Invalid option! Please try again.");
                         continue;
+                    }
+                    else
+                    {
+                        throw new Exception();
                     }
                 }
                 while (true)
@@ -290,6 +298,7 @@ namespace TheShadowKnight
                     }
                     else
                     {
+
                         Console.WriteLine("Invalid option! Please try again.");
                         continue;
                     }
@@ -311,6 +320,7 @@ namespace TheShadowKnight
                     Console.WriteLine("[12] Fringe Long");
                     Console.Write("Enter option: ");
                     ans = Console.ReadLine();
+                    ansInt = Convert.ToInt32(ans);
 
                     if (ans.Equals("1"))
                     {
@@ -372,10 +382,14 @@ namespace TheShadowKnight
                         hairStyle = "Fringe Long";
                         break;
                     }
-                    else
+                    else if (ansInt >= 13)
                     {
                         Console.WriteLine("Invalid option! Please try again.");
                         continue;
+                    }
+                    else
+                    {
+                        throw new Exception();
                     }
                 }
                 while (true)
@@ -392,6 +406,7 @@ namespace TheShadowKnight
                     Console.WriteLine("[9] Gray");
                     Console.Write("Enter option: ");
                     ans = Console.ReadLine();
+                    ansInt = Convert.ToInt32(ans);
 
                     if (ans.Equals("1"))
                     {
@@ -438,10 +453,14 @@ namespace TheShadowKnight
                         hairColor = "Gray";
                         break;
                     }
-                    else
+                    else if (ansInt >= 10)
                     {
                         Console.WriteLine("Invalid option! Please try again.");
                         continue;
+                    }
+                    else
+                    {
+                        throw new Exception();
                     }
                 }
                 while (true)
@@ -458,6 +477,7 @@ namespace TheShadowKnight
                     Console.WriteLine("[9] Gray");
                     Console.Write("Enter option: ");
                     ans = Console.ReadLine();
+                    ansInt = Convert.ToInt32(ans);
 
                     if (ans.Equals("1"))
                     {
@@ -504,10 +524,14 @@ namespace TheShadowKnight
                         eyeColor = "Gray";
                         break;
                     }
-                    else
+                    else if (ansInt >= 10)
                     {
                         Console.WriteLine("Invalid option! Please try again.");
                         continue;
+                    }
+                    else
+                    {
+                        throw new Exception();
                     }
                 }
                 while (true)
@@ -520,6 +544,7 @@ namespace TheShadowKnight
                     Console.WriteLine("[5] Dark");
                     Console.Write("Enter option: ");
                     ans = Console.ReadLine();
+                    ansInt = Convert.ToInt32(ans);
 
                     if (ans.Equals("1"))
                     {
@@ -546,10 +571,14 @@ namespace TheShadowKnight
                         skinTone = "Dark";
                         break;
                     }
-                    else
+                    else if (ansInt >= 6)
                     {
                         Console.WriteLine("Invalid option! Please try again.");
                         continue;
+                    }
+                    else
+                    {
+                        throw new Exception();
                     }
                 }
                 while (true)
@@ -562,6 +591,7 @@ namespace TheShadowKnight
                     Console.WriteLine("[5] Bodybuilder");
                     Console.Write("Enter option: ");
                     ans = Console.ReadLine();
+                    ansInt = Convert.ToInt32(ans);
 
                     if (ans.Equals("1"))
                     {
@@ -588,10 +618,14 @@ namespace TheShadowKnight
                         charMass = "Bodybuilder";
                         break;
                     }
-                    else
+                    else if (ansInt >= 6)
                     {
                         Console.WriteLine("Invalid option! Please try again.");
                         continue;
+                    }
+                    else
+                    {
+                        throw new Exception();
                     }
                 }
                 while (true)
@@ -606,6 +640,7 @@ namespace TheShadowKnight
                     Console.WriteLine("[7] Scout");
                     Console.Write("Enter option: ");
                     ans = Console.ReadLine();
+                    ansInt = Convert.ToInt32(ans);
 
                     if (ans.Equals("1"))
                     {
@@ -642,10 +677,14 @@ namespace TheShadowKnight
                         charClass = "Scout";
                         break;
                     }
-                    else
+                    else if (ansInt >= 8)
                     {
                         Console.WriteLine("Invalid option! Please try again.");
                         continue;
+                    }
+                    else
+                    {
+                        throw new Exception();
                     }
                 }
                 while (true)
@@ -659,6 +698,7 @@ namespace TheShadowKnight
                     Console.WriteLine("[6] Darkness");
                     Console.Write("Enter option: ");
                     ans = Console.ReadLine();
+                    ansInt = Convert.ToInt32(ans);
 
                     if (ans.Equals("1"))
                     {
@@ -690,10 +730,14 @@ namespace TheShadowKnight
                         charElement = "Darkness";
                         break;
                     }
-                    else
+                    else if (ansInt >= 7)
                     {
                         Console.WriteLine("Invalid option! Please try again.");
                         continue;
+                    }
+                    else
+                    {
+                        throw new Exception();
                     }
                 }
                 while (true)
@@ -706,6 +750,7 @@ namespace TheShadowKnight
                     Console.WriteLine("[5] Adventurers' Guild");
                     Console.Write("Enter option: ");
                     ans = Console.ReadLine();
+                    ansInt = Convert.ToInt32(ans);
 
                     if (ans.Equals("1"))
                     {
@@ -732,10 +777,14 @@ namespace TheShadowKnight
                         charFaction = "Adventurers' Guild";
                         break;
                     }
-                    else
+                    else if (ansInt >= 6)
                     {
                         Console.WriteLine("Invalid option! Please try again.");
                         continue;
+                    }
+                    else
+                    {
+                        throw new Exception();
                     }
                 }
 
@@ -979,11 +1028,30 @@ namespace TheShadowKnight
                     }
                 }
                 Player.setInfo(hasMoustache, hasBeard, hasGoatee, hasHeadband, hasEarrings, hasNecklace, hasRing);
+                try
+                {
 
-                Console.WriteLine("\nCharacter has been created.");
-                Player.showInfo();
-                Player.showStats();
-                Player.showAdditionals();
+                    SqlConnection connection;
+                    String connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=C:\USERS\LEIJ\SOURCE\REPOS\THESHADOWKNIGHT\THESHADOWKNIGHT\DATABASE1.MDF;Integrated Security=True";
+                    connection = new SqlConnection(connectionString);
+                    connection.Open();
+
+                    string insertQueryDB = "INSERT INTO dbo.CHARACTER_INFO (char_name, char_race, char_gender, char_hairstyle, char_haircolor, char_eyecolor, char_skintone, char_mass, char_class, char_element, char_faction, char_str, char_agi, char_int, char_dex, char_luck, has_moustache, has_beard, has_goatee, has_headband, has_earrings, has_necklace, has_ring) " +
+                           "VALUES ('" + charName + "'," + charRace + "'," + charGender + "'," + hairStyle + "'," + hairColor + "'," + eyeColor + "'," + skinTone + "'," + charMass + "'," + charClass + "'," + charElement + "'," + charFaction + "'," + charStr + "'," + charAgi + "'," + charInt + "'," + charDex + "'," + charLuck + "'," + hasMoustache + "'," + hasBeard + "'," + hasGoatee + "'," + hasHeadband + "'," + hasEarrings + "'," + hasNecklace + "','" + hasRing + ")";
+                    SqlCommand insertToDB = new SqlCommand(insertQueryDB, connection);
+                    insertToDB.ExecuteNonQuery();
+                    Console.WriteLine("\nCharacter has been created.");
+
+                    Player.showInfo();
+                    Player.showStats();
+                    Player.showAdditionals();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Character creation failed.");
+                    Console.WriteLine(ex.Message);
+                }
+
             }
             catch (Exception ex)
             {

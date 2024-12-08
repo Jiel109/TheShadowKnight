@@ -8,7 +8,7 @@ namespace TheShadowKnight
         static String ans;
         public static void Cred()
         {
-            Console.WriteLine("CREDITS");
+            Console.WriteLine("\nCREDITS");
             Console.WriteLine("\nGAME CREATORS");
             Console.WriteLine("\n[Lead Programmer]");
             Console.WriteLine("Arleij Jan Lopez");
