@@ -1037,7 +1037,7 @@ namespace TheShadowKnight
                     connection.Open();
 
                     string insertQueryDB = "INSERT INTO dbo.CHARACTER_INFO (char_name, char_race, char_gender, char_hairstyle, char_haircolor, char_eyecolor, char_skintone, char_mass, char_class, char_element, char_faction, char_str, char_agi, char_int, char_dex, char_luck, has_moustache, has_beard, has_goatee, has_headband, has_earrings, has_necklace, has_ring) " +
-                           "VALUES ('" + charName + "'," + charRace + "'," + charGender + "'," + hairStyle + "'," + hairColor + "'," + eyeColor + "'," + skinTone + "'," + charMass + "'," + charClass + "'," + charElement + "'," + charFaction + "'," + charStr + "'," + charAgi + "'," + charInt + "'," + charDex + "'," + charLuck + "'," + hasMoustache + "'," + hasBeard + "'," + hasGoatee + "'," + hasHeadband + "'," + hasEarrings + "'," + hasNecklace + "','" + hasRing + ")";
+                           "VALUES ('" + charName + "'," + charRace + "'," + charGender + "'," + hairStyle + "'," + hairColor + "'," + eyeColor + "'," + skinTone + "'," + charMass + "'," + charClass + "'," + charElement + "'," + charFaction + "'," + charStr + "'," + charAgi + "'," + charInt + "'," + charDex + "'," + charLuck + "'," + hasMoustache + "'," + hasBeard + "'," + hasGoatee + "'," + hasHeadband + "'," + hasEarrings + "'," + hasNecklace + "','" + hasRing + "')";
                     SqlCommand insertToDB = new SqlCommand(insertQueryDB, connection);
                     insertToDB.ExecuteNonQuery();
                     Console.WriteLine("\nCharacter has been created.");
