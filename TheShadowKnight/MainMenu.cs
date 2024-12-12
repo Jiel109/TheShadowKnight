@@ -51,24 +51,6 @@ namespace TheShadowKnight
                     else if (ans.Equals("2"))
                     {
                         LoadGame.LoadCharacter();
-                        Console.WriteLine("\nReturn to Main Menu? [Y/N]");
-                        ans = Console.ReadLine();
-                        if (ans.ToUpper().Equals("Y"))
-                        {
-                            continue;
-                        }
-                        else if (ans.ToUpper().Equals("N"))
-                        {
-                            Console.WriteLine("Thank you for playing the game!");
-                            Console.WriteLine("Exiting in 5 seconds...");
-                            Thread.Sleep(5000);
-                            System.Environment.Exit(0);
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid option! Please try again.");
-                            continue;
-                        }
                     }
                     else if (ans.Equals("3"))
                     {

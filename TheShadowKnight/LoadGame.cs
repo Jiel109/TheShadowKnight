@@ -1,20 +1,22 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.FileIO;
+using System;
 using System.Collections;
 using System.Data.SqlClient;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace TheShadowKnight
 {
     class LoadGame
     {
         static int ansInt, charID, charStr, charAgi, charInt, charDex, charLuck;
-        static String charName, charRace, charGender, hairStyle, hairColor, eyeColor, skinTone, charMass, charClass, charElement, charFaction;
+        static String ans, charName, charRace, charGender, hairStyle, hairColor, eyeColor, skinTone, charMass, charClass, charElement, charFaction;
         static bool hasMoustache, hasBeard, hasGoatee, hasHeadband, hasEarrings, hasNecklace, hasRing;
         public static void LoadCharacter()
         {
             Console.WriteLine("\nLOAD GAME");
             SqlConnection connection;
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=C:\USERS\LEIJ\SOURCE\REPOS\THESHADOWKNIGHT\THESHADOWKNIGHT\DATABASE1.MDF;Integrated Security=True";
-            string selectQueryDB = "SELECT char_id, char_name, char_race, char_gender, char_hairstyle, char_haircolor, char_eyecolor, char_skintone, char_mass, char_class, char_element, char_faction, char_str, char_agi, char_int, char_dex, char_luck, has_moustache, has_beard, has_goatee, has_headband, has_earrings, has_necklace, has_ring FROM dbo.CHARACTER_INFO";
+            String connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=C:\USERS\LEIJ\SOURCE\REPOS\THESHADOWKNIGHT\THESHADOWKNIGHT\DATABASE1.MDF;Integrated Security=True";
+            String selectQueryDB = "SELECT * FROM dbo.CHARACTER_INFO";
 
             List<StoreCharInfo> charInfo = new List<StoreCharInfo>();
 
@@ -27,66 +29,212 @@ namespace TheShadowKnight
                     connection.Open();
                     SqlDataReader dbReader = selectFromDB.ExecuteReader();
 
+                    
                     while (dbReader.Read())
                     {
-                        charID = Convert.ToInt32(dbReader["char_id"]);
-                        charName = dbReader["char_name"].ToString();
-                        charRace = dbReader["char_race"].ToString();
-                        charGender = dbReader["char_gender"].ToString();
-                        hairStyle = dbReader["char_hairstyle"].ToString();
-                        hairColor = dbReader["char_haircolor"].ToString();
-                        eyeColor = dbReader["char_eyecolor"].ToString();
-                        skinTone = dbReader["char_skintone"].ToString();
-                        charMass = dbReader["char_mass"].ToString();
-                        charClass = dbReader["char_class"].ToString();
-                        charElement = dbReader["char_element"].ToString();
-                        charFaction = dbReader["char_faction"].ToString();
-                        charStr = Convert.ToInt32(dbReader["char_str"]);
-                        charAgi = Convert.ToInt32(dbReader["char_agi"]);
-                        charInt = Convert.ToInt32(dbReader["char_int"]);
-                        charDex = Convert.ToInt32(dbReader["char_dex"]);
-                        charLuck = Convert.ToInt32(dbReader["char_luck"]);
-                        hasMoustache = Convert.ToBoolean(dbReader["has_moustache"]);
-                        hasBeard = Convert.ToBoolean(dbReader["has_beard"]);
-                        hasGoatee = Convert.ToBoolean(dbReader["has_goatee"]);
-                        hasHeadband = Convert.ToBoolean(dbReader["has_headband"]);
-                        hasEarrings = Convert.ToBoolean(dbReader["has_earrings"]);
-                        hasNecklace = Convert.ToBoolean(dbReader["has_necklace"]);
-                        hasRing = Convert.ToBoolean(dbReader["has_ring"]);
+                        int charID = Convert.ToInt32(dbReader["char_id"]);
+                        string charName = dbReader["char_name"].ToString();
+                        string charRace = dbReader["char_race"].ToString();
+                        string charGender = dbReader["char_gender"].ToString();
+                        string hairStyle = dbReader["char_hairstyle"].ToString();
+                        string hairColor = dbReader["char_haircolor"].ToString();
+                        string eyeColor = dbReader["char_eyecolor"].ToString();
+                        string skinTone = dbReader["char_skintone"].ToString();
+                        string charMass = dbReader["char_mass"].ToString();
+                        string charClass = dbReader["char_class"].ToString();
+                        string charElement = dbReader["char_element"].ToString();
+                        string charFaction = dbReader["char_faction"].ToString();
+                        int charStr = Convert.ToInt32(dbReader["char_str"]);
+                        int charAgi = Convert.ToInt32(dbReader["char_agi"]);
+                        int charInt = Convert.ToInt32(dbReader["char_int"]);
+                        int charDex = Convert.ToInt32(dbReader["char_dex"]);
+                        int charLuck = Convert.ToInt32(dbReader["char_luck"]);
+                        bool hasMoustache = Convert.ToBoolean(dbReader["has_moustache"]);
+                        bool hasBeard = Convert.ToBoolean(dbReader["has_beard"]);
+                        bool hasGoatee = Convert.ToBoolean(dbReader["has_goatee"]);
+                        bool hasHeadband = Convert.ToBoolean(dbReader["has_headband"]);
+                        bool hasEarrings = Convert.ToBoolean(dbReader["has_earrings"]);
+                        bool hasNecklace = Convert.ToBoolean(dbReader["has_necklace"]);
+                        bool hasRing = Convert.ToBoolean(dbReader["has_ring"]);
 
-                        charInfo.Add(new StoreCharInfo(charID, charName, charRace, charGender, hairStyle, hairColor, eyeColor, skinTone, charMass, charClass, charElement, charFaction, charStr, charAgi, charInt, charDex, charLuck, hasMoustache, hasBeard, hasGoatee, hasHeadband, hasEarrings, hasNecklace, hasRing));
-
-                        Console.WriteLine("[" + charID + "] " + charName);
+                        
+                        charInfo.Add(new StoreCharInfo(charID, charName, charRace, charGender, hairStyle, hairColor, eyeColor, skinTone, charMass,
+                            charClass, charElement, charFaction, charStr, charAgi, charInt, charDex, charLuck, hasMoustache, hasBeard, hasGoatee,
+                            hasHeadband, hasEarrings, hasNecklace, hasRing));
                     }
 
                     dbReader.Close();
+
+                    
+                    if (charInfo.Count > 0)
+                    {
+                        Console.WriteLine("Loaded Characters:");
+                        foreach (var save in charInfo)
+                        {
+                            Console.WriteLine("[" + save.ID + "] " + save.Name);
+                        }
+
+                        
+                        Console.WriteLine("Enter the ID of the Character to load: ");
+                        int ansInt = Convert.ToInt32(Console.ReadLine());
+
+                        StoreCharInfo findChar = charInfo.Find(character => character.ID == ansInt);
+                        if (findChar != null)
+                        {
+                            Console.WriteLine("Successfully loaded! ");
+                            Console.WriteLine("\nCharacter Information:");
+                            
+                            Console.WriteLine("Character Name: " + findChar.Name);
+                            Console.WriteLine("Character Race: " + findChar.Race);
+                            Console.WriteLine("Character Gender: " + findChar.Gender);
+                            Console.WriteLine("Character Hairstyle: " + findChar.HairStyle);
+                            Console.WriteLine("Character Haircolor: " + findChar.HairColor);
+                            Console.WriteLine("Character Eyecolor: " + findChar.EyeColor);
+                            Console.WriteLine("Character Skin Tone: " + findChar.SkinTone);
+                            Console.WriteLine("Character Mass: " + findChar.Mass);
+                            Console.WriteLine("Character Class: " + findChar.Class);
+                            Console.WriteLine("Character Element: " + findChar.Element);
+                            Console.WriteLine("Character Faction: " + findChar.Faction);
+                            Console.WriteLine("Character Stats:");
+                            Console.WriteLine("\tStrength: " + findChar.Str);
+                            Console.WriteLine("\tAgility: " + findChar.Agi);
+                            Console.WriteLine("\tIntelligence: " + findChar.Int);
+                            Console.WriteLine("\tDexterity: " + findChar.Dex);
+                            Console.WriteLine("\tLuck: " + findChar.Luck);
+                            Console.WriteLine("Character Additional Features:");
+                            Console.WriteLine("\tCharacter Moustache: " + findChar.Moustache);
+                            Console.WriteLine("\tCharacter Beard: " + findChar.Beard);
+                            Console.WriteLine("\tCharacter Goatee: " + findChar.Goatee);
+                            Console.WriteLine("\tCharacter Headband: " + findChar.Headband);
+                            Console.WriteLine("\tCharacter Earrings: " + findChar.Earrings);
+                            Console.WriteLine("\tCharacter Necklace: " + findChar.Necklace);
+                            Console.WriteLine("\tCharacter Ring: " + findChar.Ring);
+
+                            
+                            Console.WriteLine("[1] Go back");
+                            Console.WriteLine("[2] Return to Main Menu");
+                            Console.WriteLine("[3] Delete Character");
+                            Console.WriteLine("[4] Exit");
+                            Console.Write("Enter option: ");
+                            ansInt = Convert.ToInt32(Console.ReadLine());
+
+                            if (ansInt == 1)
+                            {
+                                return; 
+                            }
+                            else if (ansInt == 2)
+                            {
+                                return; 
+                            }
+                            else if (ansInt == 3)
+                            {
+                                DelChar(findChar.ID); 
+                                charInfo.Remove(findChar); 
+                                Console.Write("Return to Main Menu? [Y/N]: ");
+                                string ans = Console.ReadLine();
+                                if (ans.ToUpper().Equals("Y"))
+                                {
+                                    return;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Exiting in 5 seconds...");
+                                    Thread.Sleep(5000);
+                                    System.Environment.Exit(0);
+                                }
+                            }
+                            else if (ansInt == 4)
+                            {
+                                Console.WriteLine("Thank you for playing the game!");
+                                Console.WriteLine("Exiting in 5 seconds...");
+                                Thread.Sleep(5000);
+                                System.Environment.Exit(0);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid option! Please try again.");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Character not found! Please try again.");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("No saved characters available in the game.");
+                        Console.Write("Return to Main menu? [Y/N]: ");
+                        string ans = Console.ReadLine();
+                        if (ans.ToUpper().Equals("Y"))
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Exiting in 5 seconds...");
+                            Thread.Sleep(5000);
+                            System.Environment.Exit(0);
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine("Failed to load existing characters.");
                     Console.WriteLine(ex.Message);
                 }
+            }
+        }
+
+        public static void DelChar(int charID)
+        {
+            string ans;
+            SqlConnection connection;
+
+            String connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=C:\USERS\LEIJ\SOURCE\REPOS\THESHADOWKNIGHT\THESHADOWKNIGHT\DATABASE1.MDF;Integrated Security=True";
+
+            using (connection = new SqlConnection(connectionString))
+            {
+                String deleteQueryDB = "DELETE FROM dbo.CHARACTER_INFO WHERE char_id = " + charID;
+
+                SqlCommand delete = new SqlCommand(deleteQueryDB, connection);
+
                 while (true)
                 {
-                    Console.WriteLine("Enter the number of the character to load: ");
-                    ansInt = Convert.ToInt32(Console.ReadLine());
-                        
-                    StoreCharInfo findChar = charInfo.Find(character => character.ID == ansInt);
-                    if (findChar != null)
+                    Console.Write("Confirm deletion? [Y/N]: ");
+                    ans = Console.ReadLine();
+
+                    if (ans.ToUpper().Equals("Y"))
                     {
-                        Console.WriteLine("Character Information");
-                        Console.WriteLine("Character Name: " + findChar.Name);
+                        try
+                        {
+                            connection.Open();
+                            delete.ExecuteNonQuery();
+                            Console.WriteLine("Character deleted successfully.");
+                            break;
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Error in deleting character.");
+                            Console.WriteLine(ex.Message);
+                        }
+                        finally
+                        {
+                            connection.Close();
+                        }
+                    }
+                    else if (ans.ToUpper().Equals("N"))
+                    {
+                        break;
                     }
                     else
                     {
-                        Console.WriteLine("Character not found! Please try again.");
+                        Console.WriteLine("Invalid option! Please try again.");
                         continue;
                     }
                 }
             }
         }
     }
-}
     class StoreCharInfo
     {
         public int ID { get; set; }
@@ -101,7 +249,7 @@ namespace TheShadowKnight
         public String Class { get; set; }
         public String Element { get; set; }
         public String Faction { get; set; }
-        public int Str {  get; set; }
+        public int Str { get; set; }
         public int Agi { get; set; }
         public int Int { get; set; }
         public int Dex { get; set; }
@@ -141,4 +289,6 @@ namespace TheShadowKnight
             Necklace = necklace;
             Ring = ring;
         }
+    }
 }
+    

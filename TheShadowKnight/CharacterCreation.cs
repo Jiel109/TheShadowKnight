@@ -206,7 +206,7 @@ namespace TheShadowKnight
     {
         static String ans, charName, charRace, charGender, hairStyle, hairColor,
         eyeColor, skinTone, charMass, charClass, charElement, charFaction;
-        static int ansInt, statsInput, maxStatsLimit = 50, charStr = 1, charAgi = 1, charInt = 1, charDex = 1, charLuck = 1, ansint = 0;
+        static int ansInt, statsInput, maxStatsLimit, charStr, charAgi, charInt, charDex, charLuck, ansint = 0;
         static bool hasMoustache = false, hasBeard = false, hasGoatee = false, hasHeadband = false, hasEarrings = false,
         hasNecklace = false, hasRing = false;
         public static void Character()
@@ -743,28 +743,28 @@ namespace TheShadowKnight
                 while (true)
                 {
                     Console.WriteLine("Character Faction");
-                    Console.WriteLine("[1] Knight's Order");
-                    Console.WriteLine("[2] Mercenaries' Guild");
-                    Console.WriteLine("[3] Merchants' Guild");
+                    Console.WriteLine("[1] Knights Order");
+                    Console.WriteLine("[2] Mercenaries Guild");
+                    Console.WriteLine("[3] Merchants Guild");
                     Console.WriteLine("[4] Holy Church");
-                    Console.WriteLine("[5] Adventurers' Guild");
+                    Console.WriteLine("[5] Adventurers Guild");
                     Console.Write("Enter option: ");
                     ans = Console.ReadLine();
                     ansInt = Convert.ToInt32(ans);
 
                     if (ans.Equals("1"))
                     {
-                        charFaction = "Knight's Order";
+                        charFaction = "Knights Order";
                         break;
                     }
                     else if (ans.Equals("2"))
                     {
-                        charFaction = "Mercenaries' Guild";
+                        charFaction = "Mercenaries Guild";
                         break;
                     }
                     else if (ans.Equals("3"))
                     {
-                        charFaction = "Merchants' Guild";
+                        charFaction = "Merchants Guild";
                         break;
                     }
                     else if (ans.Equals("4"))
@@ -774,7 +774,7 @@ namespace TheShadowKnight
                     }
                     else if (ans.Equals("5"))
                     {
-                        charFaction = "Adventurers' Guild";
+                        charFaction = "Adventurers Guild";
                         break;
                     }
                     else if (ansInt >= 6)
@@ -789,7 +789,12 @@ namespace TheShadowKnight
                 }
 
                 Player.setInfo(charName, charRace, charGender, hairStyle, hairColor, eyeColor, skinTone, charMass, charClass, charElement, charFaction);
-
+                maxStatsLimit = 50; 
+                charStr = 1;
+                charAgi = 1;
+                charInt = 1;
+                charDex = 1;
+                charLuck = 1;
                 while (maxStatsLimit > 0)
                 {
                     Console.WriteLine("Character Stats");
@@ -1028,34 +1033,46 @@ namespace TheShadowKnight
                     }
                 }
                 Player.setInfo(hasMoustache, hasBeard, hasGoatee, hasHeadband, hasEarrings, hasNecklace, hasRing);
+
+                SqlConnection connection;
+                String connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=C:\USERS\LEIJ\SOURCE\REPOS\THESHADOWKNIGHT\THESHADOWKNIGHT\DATABASE1.MDF;Integrated Security=True";
+                connection = new SqlConnection(connectionString);
+                connection.Open();
                 try
                 {
+                    String insertQueryDB = "INSERT INTO dbo.CHARACTER_INFO (char_name, char_race, char_gender, " +
+                       "char_hairstyle, char_haircolor, char_eyecolor, char_skintone, char_mass, " +
+                       "char_class, char_element, char_faction, char_str, char_agi, char_int, char_dex, char_luck, " +
+                       "has_moustache, has_beard, has_goatee, has_headband, has_earrings, has_necklace, has_ring) " +
+                       "VALUES ('" + charName + "', '" + charRace + "', '" + charGender + "', '" + hairStyle + "', '" +
+                       hairColor + "', '" + eyeColor + "', '" + skinTone + "', '" + charMass + "', '" + charClass + "', '" +
+                       charElement + "', '" + charFaction + "', " + charStr + ", " + charAgi + ", " + charInt + ", " +
+                       charDex + ", " + charLuck + ", '" + hasMoustache + "','" + hasBeard + "','" + hasGoatee + "','" + 
+                       hasHeadband + "','" + hasEarrings + "','" + hasNecklace + "','" + hasRing + "')";
 
-                    SqlConnection connection;
-                    String connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=C:\USERS\LEIJ\SOURCE\REPOS\THESHADOWKNIGHT\THESHADOWKNIGHT\DATABASE1.MDF;Integrated Security=True";
-                    connection = new SqlConnection(connectionString);
-                    connection.Open();
+                        SqlCommand insertToDB = new SqlCommand(insertQueryDB, connection);
+                        insertToDB.ExecuteNonQuery();
+                        Console.WriteLine("\nCharacter has been created.");
 
-                    string insertQueryDB = "INSERT INTO dbo.CHARACTER_INFO (char_name, char_race, char_gender, char_hairstyle, char_haircolor, char_eyecolor, char_skintone, char_mass, char_class, char_element, char_faction, char_str, char_agi, char_int, char_dex, char_luck, has_moustache, has_beard, has_goatee, has_headband, has_earrings, has_necklace, has_ring) " +
-                           "VALUES ('" + charName + "'," + charRace + "'," + charGender + "'," + hairStyle + "'," + hairColor + "'," + eyeColor + "'," + skinTone + "'," + charMass + "'," + charClass + "'," + charElement + "'," + charFaction + "'," + charStr + "'," + charAgi + "'," + charInt + "'," + charDex + "'," + charLuck + "'," + hasMoustache + "'," + hasBeard + "'," + hasGoatee + "'," + hasHeadband + "'," + hasEarrings + "'," + hasNecklace + "','" + hasRing + "')";
-                    SqlCommand insertToDB = new SqlCommand(insertQueryDB, connection);
-                    insertToDB.ExecuteNonQuery();
-                    Console.WriteLine("\nCharacter has been created.");
-
-                    Player.showInfo();
-                    Player.showStats();
-                    Player.showAdditionals();
+                        Player.showInfo();
+                        Player.showStats();
+                        Player.showAdditionals();
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine("Character creation failed.");
                     Console.WriteLine(ex.Message);
+                    System.Environment.Exit(0);
                 }
-
+                finally
+                {
+                    connection.Close();
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine("An error has occured " + ex.Message);
+                System.Environment.Exit(0);
             }
         }
     }
