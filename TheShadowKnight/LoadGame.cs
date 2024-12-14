@@ -10,12 +10,13 @@ namespace TheShadowKnight
     {
         static int ansInt, charID, charStr, charAgi, charInt, charDex, charLuck;
         static String ans, charName, charRace, charGender, hairStyle, hairColor, eyeColor, skinTone, charMass, charClass, charElement, charFaction, ans1;
-        static bool hasMoustache, hasBeard, hasGoatee, hasHeadband, hasEarrings, hasNecklace, hasRing;
+        static bool hasMoustache, hasBeard, hasGoatee, hasHeadband, hasEarrings, hasNecklace, hasRing, error;
         public static void LoadCharacter()
         {
+            error = true;
             Console.WriteLine("\nLOAD GAME");
             SqlConnection connection;
-            String connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=C:\USERS\LEIJ\SOURCE\REPOS\THESHADOWKNIGHT\THESHADOWKNIGHT\DATABASE1.MDF;Integrated Security=True";
+            String connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=C:\Users\Admin\Desktop\st\3 1 SEM\Prog 3\TheShadowKnight-master\TheShadowKnight\CharacterDatabase.mdf;Integrated Security=True";
             String selectQueryDB = "SELECT * FROM dbo.CHARACTER_INFO";
 
             List<StoreCharInfo> charInfo = new List<StoreCharInfo>();
@@ -120,27 +121,33 @@ namespace TheShadowKnight
 
                             if (ansInt == 1)
                             {
-                                return; 
+                                LoadGame.LoadCharacter();
                             }
                             else if (ansInt == 2)
                             {
+                                Console.Clear();
                                 return; 
                             }
                             else if (ansInt == 3)
                             {
                                 DelChar(findChar.ID); 
-                                charInfo.Remove(findChar); 
-                                Console.Write("Return to Main Menu? [Y/N]: ");
-                                string ans = Console.ReadLine();
-                                if (ans.ToUpper().Equals("Y"))
+                                charInfo.Remove(findChar);
+                                while (error == true)
                                 {
-                                    return;
-                                }
-                                else
-                                {
-                                    Console.WriteLine("Exiting in 5 seconds...");
-                                    Thread.Sleep(5000);
-                                    System.Environment.Exit(0);
+                                    Console.Write("Return to Main Menu? [Y/N]: ");
+                                    string ans = Console.ReadLine();
+                                    if (ans.ToUpper().Equals("Y"))
+                                    {
+                                        error = false;
+                                        Console.Clear();
+                                        return;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Exiting in 5 seconds...");
+                                        Thread.Sleep(5000);
+                                        System.Environment.Exit(0);
+                                    }
                                 }
                             }
                             else if (ansInt == 4)
@@ -183,6 +190,7 @@ namespace TheShadowKnight
                     Console.WriteLine(ex.Message);
                     Console.WriteLine("\nPress any key to continue");
                     ans1 = Console.ReadLine();
+                    Console.Clear();
                 }
             }
         }
@@ -192,7 +200,7 @@ namespace TheShadowKnight
             string ans;
             SqlConnection connection;
 
-            String connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=C:\USERS\LEIJ\SOURCE\REPOS\THESHADOWKNIGHT\THESHADOWKNIGHT\DATABASE1.MDF;Integrated Security=True";
+            String connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=C:\Users\Admin\Desktop\st\3 1 SEM\Prog 3\TheShadowKnight-master\TheShadowKnight\CharacterDatabase.mdf;Integrated Security=True";
 
             using (connection = new SqlConnection(connectionString))
             {
