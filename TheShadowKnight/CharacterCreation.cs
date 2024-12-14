@@ -205,7 +205,7 @@ namespace TheShadowKnight
     public class CharacterCreation
     {
         static String ans, charName, charRace, charGender, hairStyle, hairColor,
-        eyeColor, skinTone, charMass, charClass, charElement, charFaction;
+        eyeColor, skinTone, charMass, charClass, charElement, charFaction, ans1;
         static int ansInt, statsInput, maxStatsLimit, charStr, charAgi, charInt, charDex, charLuck, ansint = 0;
         static bool hasMoustache = false, hasBeard = false, hasGoatee = false, hasHeadband = false, hasEarrings = false,
         hasNecklace = false, hasRing = false;
@@ -268,7 +268,7 @@ namespace TheShadowKnight
                         charRace = "Beastman";
                         break;
                     }
-                    else if (ansInt >= 6)
+                    else if(ansInt >= 6)
                     {
                         Console.WriteLine("Invalid option! Please try again.");
                         continue;
@@ -811,10 +811,14 @@ namespace TheShadowKnight
                         Console.WriteLine("Add stats to Character Strength: ");
                         statsInput = Convert.ToInt32(Console.ReadLine());
 
-                        if (statsInput <= maxStatsLimit)
+                        if (statsInput <= maxStatsLimit && statsInput >= 1)
                         {
                             charStr += statsInput;
                             maxStatsLimit -= statsInput;
+                        }
+                        else if (statsInput <= 0)
+                        {
+                            Console.WriteLine("Negative number detected try again.");
                         }
                         else
                         {
@@ -826,10 +830,14 @@ namespace TheShadowKnight
                         Console.WriteLine("Add stats to Character Agility: ");
                         statsInput = Convert.ToInt32(Console.ReadLine());
 
-                        if (statsInput <= maxStatsLimit)
+                        if (statsInput <= maxStatsLimit && statsInput >= 1)
                         {
                             charAgi += statsInput;
                             maxStatsLimit -= statsInput;
+                        }
+                        else if (statsInput <= 0)
+                        {
+                            Console.WriteLine("Negative number detected try again.");
                         }
                         else
                         {
@@ -841,10 +849,14 @@ namespace TheShadowKnight
                         Console.WriteLine("Add stats to Character Intelligence: ");
                         statsInput = Convert.ToInt32(Console.ReadLine());
 
-                        if (statsInput <= maxStatsLimit)
+                        if (statsInput <= maxStatsLimit && statsInput >= 1)
                         {
                             charInt += statsInput;
                             maxStatsLimit -= statsInput;
+                        }
+                        else if (statsInput <= 0)
+                        {
+                            Console.WriteLine("Negative number detected try again.");
                         }
                         else
                         {
@@ -856,10 +868,14 @@ namespace TheShadowKnight
                         Console.WriteLine("Add stats to Character Dexterity: ");
                         statsInput = Convert.ToInt32(Console.ReadLine());
 
-                        if (statsInput <= maxStatsLimit)
+                        if (statsInput <= maxStatsLimit && statsInput >= 1)
                         {
                             charDex += statsInput;
                             maxStatsLimit -= statsInput;
+                        }
+                        else if (statsInput <= 0)
+                        {
+                            Console.WriteLine("Negative number detected try again.");
                         }
                         else
                         {
@@ -871,10 +887,14 @@ namespace TheShadowKnight
                         Console.WriteLine("Add stats to Character Luck: ");
                         statsInput = Convert.ToInt32(Console.ReadLine());
 
-                        if (statsInput <= maxStatsLimit)
+                        if (statsInput <= maxStatsLimit && statsInput >= 1)
                         {
                             charLuck += statsInput;
                             maxStatsLimit -= statsInput;
+                        }
+                        else if (statsInput <= 0)
+                        {
+                            Console.WriteLine("Negative number detected try again.");
                         }
                         else
                         {
@@ -1071,7 +1091,9 @@ namespace TheShadowKnight
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error has occured " + ex.Message);
+                Console.WriteLine("\nAn error has occured " + ex.Message);
+                Console.WriteLine("\nPress any key to continue");
+                ans1 = Console.ReadLine();
                 System.Environment.Exit(0);
             }
         }

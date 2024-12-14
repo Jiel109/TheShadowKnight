@@ -9,7 +9,7 @@ namespace TheShadowKnight
     class LoadGame
     {
         static int ansInt, charID, charStr, charAgi, charInt, charDex, charLuck;
-        static String ans, charName, charRace, charGender, hairStyle, hairColor, eyeColor, skinTone, charMass, charClass, charElement, charFaction;
+        static String ans, charName, charRace, charGender, hairStyle, hairColor, eyeColor, skinTone, charMass, charClass, charElement, charFaction, ans1;
         static bool hasMoustache, hasBeard, hasGoatee, hasHeadband, hasEarrings, hasNecklace, hasRing;
         public static void LoadCharacter()
         {
@@ -179,8 +179,10 @@ namespace TheShadowKnight
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Failed to load existing characters.");
+                    Console.WriteLine("\nFailed to load existing characters.");
                     Console.WriteLine(ex.Message);
+                    Console.WriteLine("\nPress any key to continue");
+                    ans1 = Console.ReadLine();
                 }
             }
         }
