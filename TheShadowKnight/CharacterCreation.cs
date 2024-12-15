@@ -206,7 +206,7 @@ namespace TheShadowKnight
     {
         static String ans, charName, charRace, charGender, hairStyle, hairColor,
         eyeColor, skinTone, charMass, charClass, charElement, charFaction, ans1;
-        static int ansInt, statsInput, maxStatsLimit, charStr, charAgi, charInt, charDex, charLuck, ansint = 0;
+        static int statsInput, maxStatsLimit, charStr, charAgi, charInt, charDex, charLuck, ansint = 0;
         static bool hasMoustache = false, hasBeard = false, hasGoatee = false, hasHeadband = false, hasEarrings = false,
         hasNecklace = false, hasRing = false;
         public static void Character()
@@ -241,7 +241,6 @@ namespace TheShadowKnight
                     Console.WriteLine("[5] Beastman");
                     Console.Write("Enter option: ");
                     ans = Console.ReadLine();
-                    ansInt = Convert.ToInt32(ans);
 
                     if (ans.Equals("1"))
                     {
@@ -268,14 +267,10 @@ namespace TheShadowKnight
                         charRace = "Beastman";
                         break;
                     }
-                    else if(ansInt >= 6)
+                    else
                     {
                         Console.WriteLine("Invalid option! Please try again.");
                         continue;
-                    }
-                    else
-                    {
-                        throw new Exception();
                     }
                 }
                 while (true)
@@ -320,7 +315,6 @@ namespace TheShadowKnight
                     Console.WriteLine("[12] Fringe Long");
                     Console.Write("Enter option: ");
                     ans = Console.ReadLine();
-                    ansInt = Convert.ToInt32(ans);
 
                     if (ans.Equals("1"))
                     {
@@ -382,14 +376,10 @@ namespace TheShadowKnight
                         hairStyle = "Fringe Long";
                         break;
                     }
-                    else if (ansInt >= 13)
+                    else
                     {
                         Console.WriteLine("Invalid option! Please try again.");
                         continue;
-                    }
-                    else
-                    {
-                        throw new Exception();
                     }
                 }
                 while (true)
@@ -406,7 +396,6 @@ namespace TheShadowKnight
                     Console.WriteLine("[9] Gray");
                     Console.Write("Enter option: ");
                     ans = Console.ReadLine();
-                    ansInt = Convert.ToInt32(ans);
 
                     if (ans.Equals("1"))
                     {
@@ -453,14 +442,10 @@ namespace TheShadowKnight
                         hairColor = "Gray";
                         break;
                     }
-                    else if (ansInt >= 10)
+                    else
                     {
                         Console.WriteLine("Invalid option! Please try again.");
                         continue;
-                    }
-                    else
-                    {
-                        throw new Exception();
                     }
                 }
                 while (true)
@@ -477,7 +462,6 @@ namespace TheShadowKnight
                     Console.WriteLine("[9] Gray");
                     Console.Write("Enter option: ");
                     ans = Console.ReadLine();
-                    ansInt = Convert.ToInt32(ans);
 
                     if (ans.Equals("1"))
                     {
@@ -524,14 +508,10 @@ namespace TheShadowKnight
                         eyeColor = "Gray";
                         break;
                     }
-                    else if (ansInt >= 10)
+                    else
                     {
                         Console.WriteLine("Invalid option! Please try again.");
                         continue;
-                    }
-                    else
-                    {
-                        throw new Exception();
                     }
                 }
                 while (true)
@@ -544,7 +524,6 @@ namespace TheShadowKnight
                     Console.WriteLine("[5] Dark");
                     Console.Write("Enter option: ");
                     ans = Console.ReadLine();
-                    ansInt = Convert.ToInt32(ans);
 
                     if (ans.Equals("1"))
                     {
@@ -571,14 +550,10 @@ namespace TheShadowKnight
                         skinTone = "Dark";
                         break;
                     }
-                    else if (ansInt >= 6)
+                    else
                     {
                         Console.WriteLine("Invalid option! Please try again.");
                         continue;
-                    }
-                    else
-                    {
-                        throw new Exception();
                     }
                 }
                 while (true)
@@ -591,7 +566,6 @@ namespace TheShadowKnight
                     Console.WriteLine("[5] Bodybuilder");
                     Console.Write("Enter option: ");
                     ans = Console.ReadLine();
-                    ansInt = Convert.ToInt32(ans);
 
                     if (ans.Equals("1"))
                     {
@@ -618,14 +592,10 @@ namespace TheShadowKnight
                         charMass = "Bodybuilder";
                         break;
                     }
-                    else if (ansInt >= 6)
+                    else
                     {
                         Console.WriteLine("Invalid option! Please try again.");
                         continue;
-                    }
-                    else
-                    {
-                        throw new Exception();
                     }
                 }
                 while (true)
@@ -640,7 +610,6 @@ namespace TheShadowKnight
                     Console.WriteLine("[7] Scout");
                     Console.Write("Enter option: ");
                     ans = Console.ReadLine();
-                    ansInt = Convert.ToInt32(ans);
 
                     if (ans.Equals("1"))
                     {
@@ -677,14 +646,10 @@ namespace TheShadowKnight
                         charClass = "Scout";
                         break;
                     }
-                    else if (ansInt >= 8)
+                    else
                     {
                         Console.WriteLine("Invalid option! Please try again.");
                         continue;
-                    }
-                    else
-                    {
-                        throw new Exception();
                     }
                 }
                 while (true)
@@ -698,7 +663,6 @@ namespace TheShadowKnight
                     Console.WriteLine("[6] Darkness");
                     Console.Write("Enter option: ");
                     ans = Console.ReadLine();
-                    ansInt = Convert.ToInt32(ans);
 
                     if (ans.Equals("1"))
                     {
@@ -730,14 +694,10 @@ namespace TheShadowKnight
                         charElement = "Darkness";
                         break;
                     }
-                    else if (ansInt >= 7)
+                    else
                     {
                         Console.WriteLine("Invalid option! Please try again.");
                         continue;
-                    }
-                    else
-                    {
-                        throw new Exception();
                     }
                 }
                 while (true)
@@ -750,7 +710,6 @@ namespace TheShadowKnight
                     Console.WriteLine("[5] Adventurers Guild");
                     Console.Write("Enter option: ");
                     ans = Console.ReadLine();
-                    ansInt = Convert.ToInt32(ans);
 
                     if (ans.Equals("1"))
                     {
@@ -777,14 +736,10 @@ namespace TheShadowKnight
                         charFaction = "Adventurers Guild";
                         break;
                     }
-                    else if (ansInt >= 6)
+                    else
                     {
                         Console.WriteLine("Invalid option! Please try again.");
                         continue;
-                    }
-                    else
-                    {
-                        throw new Exception();
                     }
                 }
 
