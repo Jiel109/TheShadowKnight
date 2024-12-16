@@ -218,18 +218,44 @@ namespace TheShadowKnight
             {
                 while (true)
                 {
-                    Console.Write("Enter Character Name[Max of 20 characters]: ");
+                    Console.Write("Enter Character Name [Max of 20 characters]: ");
                     charName = Console.ReadLine();
-                    if (charName.Length <= 20)
-                    {
-                        break;
-                    }
-                    else
+
+                    if (charName.Length > 20)
                     {
                         Console.WriteLine("Name exceeds limit of 20 characters! Please try again.");
                         continue;
                     }
+
+                    string normalizedInput = charName.ToLower();
+
+                    try
+                    {
+                        string query = "SELECT char_name FROM dbo.CHARACTER_INFO WHERE LOWER(char_name) = '" + normalizedInput + "'";
+                        SqlCommand checkNameCmd = new SqlCommand(query, connection);
+                        SqlDataReader reader = checkNameCmd.ExecuteReader();
+
+                        if (reader.HasRows)
+                        {
+                            reader.Read();
+                            string existingName = reader["char_name"].ToString();
+                            reader.Close();
+                            Console.WriteLine("The name \"" + charName + "\" is already taken. (" + existingName + ")");
+                            continue;
+                        }
+
+                        reader.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("An error occurred while checking the name. Please try again.");
+                        Console.WriteLine("Error: " + ex.Message);
+                        continue;
+                    }
+
+                    break;
                 }
+
 
                 while (true)
                 {
