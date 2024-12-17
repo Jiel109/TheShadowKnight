@@ -1,7 +1,8 @@
-﻿using Microsoft.VisualBasic.FileIO;
+using Microsoft.VisualBasic.FileIO;
 using System;
 using System.Collections;
 using System.Data.SqlClient;
+using System.Reflection.Metadata.Ecma335;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace TheShadowKnight
@@ -10,10 +11,11 @@ namespace TheShadowKnight
     {
         static int ansInt, charID, charStr, charAgi, charInt, charDex, charLuck;
         static String ans, charName, charRace, charGender, hairStyle, hairColor, eyeColor, skinTone, charMass, charClass, charElement, charFaction, ans1, DBans;
-        static bool hasMoustache, hasBeard, hasGoatee, hasHeadband, hasEarrings, hasNecklace, hasRing, error;
+        static bool hasMoustache, hasBeard, hasGoatee, hasHeadband, hasEarrings, hasNecklace, hasRing, error, tryagain;
         public static void LoadCharacter()
         {
             error = true;
+            tryagain = true;
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("                        _____\r\n                        \\   /\r\n                        |   |\r\n           .__.         |   |_____________________________________________\r\n           |  |_________|   |                                              \\\r\n           |  |         |   |________________________________________________\\\r\n _____ _            _____ _               _                 _   __      _       _     _\r\n|_   _| |          /  ___| |             | |               | | / /     (_)     | |   | |\r\n  | | | |__   ___  \\ `--.| |__   __ _  __| | _____      __ | |/ / _ __  _  __ _| |__ | |_\r\n  | | | '_ \\ / _ \\  `--. | '_ \\ / _` |/ _` |/ _ \\ \\ /\\ / / |    \\| '_ \\| |/ _` | '_ \\| __|\r\n  | | | | | |  __/ /\\__/ | | | | (_| | (_| | (_) \\ V  V /  | |\\  | | | | | (_| | | | | |_\r\n  \\_/ |_| |_|\\___| \\____/|_| |_|\\__,_|\\__,_|\\___/ \\_/\\_/   \\_| \\_|_| |_|_|\\__, |_| |_|\\__|\r\n                             _____________________________________________ __/ |\r\n           |  |_________|   |                                             |___/\r\n           |__|         |   |_____________________________________________ /\r\n                        |   |\r\n                        |   |\r\n                        /___\\\n");
             Console.ForegroundColor = ConsoleColor.White;
@@ -69,257 +71,270 @@ namespace TheShadowKnight
 
                     dbReader.Close();
 
-                    Console.WriteLine("[1] View All Character");
-                    Console.WriteLine("[2] View Specific Character");
-                    Console.WriteLine("[3] Delete a Character");
-                    Console.WriteLine("[4] Return to Main Menu");
-                    Console.WriteLine("Enter Option: ");
-                    DBans = Console.ReadLine();
-
-                    if (DBans == "1")
+                    while (true)
                     {
-
-                    }
-                    else if (DBans == "2")
-                    {
-
-                        if (charInfo.Count > 0)
+                        Console.WriteLine("[1] View All Character");
+                        Console.WriteLine("[2] View Specific Character");
+                        Console.WriteLine("[3] Delete a Character");
+                        Console.WriteLine("[4] Return to Main Menu");
+                        Console.WriteLine("Enter Option: ");
+                        DBans = Console.ReadLine();
+                    
+                        if (DBans == "1")
                         {
-                            Console.WriteLine("Loaded Characters:");
-                            foreach (var save in charInfo)
+
+                        }
+                        else if (DBans == "2")
+                        {
+
+                            if (charInfo.Count > 0)
                             {
-                                Console.WriteLine("[" + save.ID + "] " + save.Name);
-                            }
-
-
-                            Console.WriteLine("Enter the ID of the Character to load: ");
-                            int ansInt = Convert.ToInt32(Console.ReadLine());
-
-                            StoreCharInfo findChar = charInfo.Find(character => character.ID == ansInt);
-                            if (findChar != null)
-                            {
-                                Console.WriteLine("Successfully loaded! ");
-                                Console.WriteLine("\nCharacter Information:");
-
-                                Console.WriteLine("Character Name: " + findChar.Name);
-                                Console.WriteLine("Character Race: " + findChar.Race);
-                                Console.WriteLine("Character Gender: " + findChar.Gender);
-                                Console.WriteLine("Character Hairstyle: " + findChar.HairStyle);
-                                Console.WriteLine("Character Haircolor: " + findChar.HairColor);
-                                Console.WriteLine("Character Eyecolor: " + findChar.EyeColor);
-                                Console.WriteLine("Character Skin Tone: " + findChar.SkinTone);
-                                Console.WriteLine("Character Mass: " + findChar.Mass);
-                                Console.WriteLine("Character Class: " + findChar.Class);
-                                Console.WriteLine("Character Element: " + findChar.Element);
-                                Console.WriteLine("Character Faction: " + findChar.Faction);
-                                Console.WriteLine("Character Stats:");
-                                Console.WriteLine("\tStrength: " + findChar.Str);
-                                Console.WriteLine("\tAgility: " + findChar.Agi);
-                                Console.WriteLine("\tIntelligence: " + findChar.Int);
-                                Console.WriteLine("\tDexterity: " + findChar.Dex);
-                                Console.WriteLine("\tLuck: " + findChar.Luck);
-                                Console.WriteLine("Character Additional Features:");
-                                Console.WriteLine("\tCharacter Moustache: " + findChar.Moustache);
-                                Console.WriteLine("\tCharacter Beard: " + findChar.Beard);
-                                Console.WriteLine("\tCharacter Goatee: " + findChar.Goatee);
-                                Console.WriteLine("\tCharacter Headband: " + findChar.Headband);
-                                Console.WriteLine("\tCharacter Earrings: " + findChar.Earrings);
-                                Console.WriteLine("\tCharacter Necklace: " + findChar.Necklace);
-                                Console.WriteLine("\tCharacter Ring: " + findChar.Ring);
-
-
-                                Console.WriteLine("[1] Go back");
-                                Console.WriteLine("[2] Return to Main Menu");
-                                Console.WriteLine("[3] Delete Character");
-                                Console.WriteLine("[4] Exit");
-                                Console.Write("Enter option: ");
-                                ansInt = Convert.ToInt32(Console.ReadLine());
-
-                                if (ansInt == 1)
+                                Console.WriteLine("Loaded Characters:");
+                                foreach (var save in charInfo)
                                 {
-                                    Console.Clear();
-                                    LoadGame.LoadCharacter();
+                                    Console.WriteLine("[" + save.ID + "] " + save.Name);
                                 }
-                                else if (ansInt == 2)
+
+
+                                Console.WriteLine("Enter the ID of the Character to load: ");
+                                int ansInt = Convert.ToInt32(Console.ReadLine());
+
+                                StoreCharInfo findChar = charInfo.Find(character => character.ID == ansInt);
+                                if (findChar != null)
+                                {
+                                    Console.WriteLine("Successfully loaded! ");
+                                    Console.WriteLine("\nCharacter Information:");
+
+                                    Console.WriteLine("Character Name: " + findChar.Name);
+                                    Console.WriteLine("Character Race: " + findChar.Race);
+                                    Console.WriteLine("Character Gender: " + findChar.Gender);
+                                    Console.WriteLine("Character Hairstyle: " + findChar.HairStyle);
+                                    Console.WriteLine("Character Haircolor: " + findChar.HairColor);
+                                    Console.WriteLine("Character Eyecolor: " + findChar.EyeColor);
+                                    Console.WriteLine("Character Skin Tone: " + findChar.SkinTone);
+                                    Console.WriteLine("Character Mass: " + findChar.Mass);
+                                    Console.WriteLine("Character Class: " + findChar.Class);
+                                    Console.WriteLine("Character Element: " + findChar.Element);
+                                    Console.WriteLine("Character Faction: " + findChar.Faction);
+                                    Console.WriteLine("Character Stats:");
+                                    Console.WriteLine("\tStrength: " + findChar.Str);
+                                    Console.WriteLine("\tAgility: " + findChar.Agi);
+                                    Console.WriteLine("\tIntelligence: " + findChar.Int);
+                                    Console.WriteLine("\tDexterity: " + findChar.Dex);
+                                    Console.WriteLine("\tLuck: " + findChar.Luck);
+                                    Console.WriteLine("Character Additional Features:");
+                                    Console.WriteLine("\tCharacter Moustache: " + findChar.Moustache);
+                                    Console.WriteLine("\tCharacter Beard: " + findChar.Beard);
+                                    Console.WriteLine("\tCharacter Goatee: " + findChar.Goatee);
+                                    Console.WriteLine("\tCharacter Headband: " + findChar.Headband);
+                                    Console.WriteLine("\tCharacter Earrings: " + findChar.Earrings);
+                                    Console.WriteLine("\tCharacter Necklace: " + findChar.Necklace);
+                                    Console.WriteLine("\tCharacter Ring: " + findChar.Ring);
+
+
+                                    Console.WriteLine("[1] Go back");
+                                    Console.WriteLine("[2] Return to Main Menu");
+                                    Console.WriteLine("[3] Delete Character");
+                                    Console.WriteLine("[4] Exit");
+                                    Console.Write("Enter option: ");
+                                    ansInt = Convert.ToInt32(Console.ReadLine());
+
+                                    if (ansInt == 1)
+                                    {
+                                        Console.Clear();
+                                        LoadGame.LoadCharacter();
+                                    }
+                                    else if (ansInt == 2)
+                                    {
+                                        Console.Clear();
+                                        return;
+                                    }
+                                    else if (ansInt == 3)
+                                    {
+                                        DelChar(findChar.ID);
+                                        charInfo.Remove(findChar);
+                                        while (error == true)
+                                        {
+                                            Console.Write("Return to Character Menu? [Y/N]: ");
+                                            string ans = Console.ReadLine();
+                                            if (ans.ToUpper().Equals("Y"))
+                                            {
+                                                error = false;
+                                                Console.Clear();
+                                                LoadGame.LoadCharacter();
+                                                return;
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine("Exiting in 5 seconds...");
+                                                Thread.Sleep(5000);
+                                                System.Environment.Exit(0);
+                                            }
+                                        }
+                                    }
+                                    else if (ansInt == 4)
+                                    {
+                                        Console.WriteLine("Thank you for playing the game!");
+                                        Console.WriteLine("Exiting in 5 seconds...");
+                                        Thread.Sleep(5000);
+                                        System.Environment.Exit(0);
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Invalid option! Please try again.");
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Character not found! Please try again.");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("No saved characters available in the game.");
+                                Console.Write("Return to Main menu? [Y/N]: ");
+                                string ans = Console.ReadLine();
+                                if (ans.ToUpper().Equals("Y"))
                                 {
                                     Console.Clear();
                                     return;
                                 }
-                                else if (ansInt == 3)
+                                else
                                 {
-                                    DelChar(findChar.ID);
-                                    charInfo.Remove(findChar);
-                                    while (error == true)
-                                    {
-                                        Console.Write("Return to Character Menu? [Y/N]: ");
-                                        string ans = Console.ReadLine();
-                                        if (ans.ToUpper().Equals("Y"))
-                                        {
-                                            error = false;
-                                            Console.Clear();
-                                            LoadGame.LoadCharacter();
-                                            return;
-                                        }
-                                        else
-                                        {
-                                            Console.WriteLine("Exiting in 5 seconds...");
-                                            Thread.Sleep(5000);
-                                            System.Environment.Exit(0);
-                                        }
-                                    }
-                                }
-                                else if (ansInt == 4)
-                                {
-                                    Console.WriteLine("Thank you for playing the game!");
                                     Console.WriteLine("Exiting in 5 seconds...");
                                     Thread.Sleep(5000);
                                     System.Environment.Exit(0);
                                 }
-                                else
+                            }
+                        }
+                        else if (DBans == "3")
+                        {
+                            if (charInfo.Count > 0)
+                            {
+                                Console.WriteLine("Loaded Characters:");
+                                foreach (var save in charInfo)
                                 {
-                                    Console.WriteLine("Invalid option! Please try again.");
+                                    Console.WriteLine("[" + save.ID + "] " + save.Name);
                                 }
-                            }
-                            else
-                            {
-                                Console.WriteLine("Character not found! Please try again.");
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("No saved characters available in the game.");
-                            Console.Write("Return to Main menu? [Y/N]: ");
-                            string ans = Console.ReadLine();
-                            if (ans.ToUpper().Equals("Y"))
-                            {
-                                Console.Clear();
-                                return;
-                            }
-                            else
-                            {
-                                Console.WriteLine("Exiting in 5 seconds...");
-                                Thread.Sleep(5000);
-                                System.Environment.Exit(0);
-                            }
-                        }
-                    }
-                    else if (DBans == "3")
-                    {
-                        if (charInfo.Count > 0)
-                        {
-                            Console.WriteLine("Loaded Characters:");
-                            foreach (var save in charInfo)
-                            {
-                                Console.WriteLine("[" + save.ID + "] " + save.Name);
-                            }
 
 
-                            Console.WriteLine("Enter the ID of the Character to delete: ");
-                            int ansInt = Convert.ToInt32(Console.ReadLine());
+                                Console.WriteLine("Enter the ID of the Character to delete: ");
+                                int ansInt = Convert.ToInt32(Console.ReadLine());
 
-                            StoreCharInfo findChar = charInfo.Find(character => character.ID == ansInt);
-                            if (findChar != null)
-                            {
-                                Console.WriteLine("Successfully loaded! ");
-                                Console.WriteLine("\nCharacter Information:");
-
-                                Console.WriteLine("Character Name: " + findChar.Name);
-                                Console.WriteLine("Character Race: " + findChar.Race);
-                                Console.WriteLine("Character Gender: " + findChar.Gender);
-                                Console.WriteLine("Character Hairstyle: " + findChar.HairStyle);
-                                Console.WriteLine("Character Haircolor: " + findChar.HairColor);
-                                Console.WriteLine("Character Eyecolor: " + findChar.EyeColor);
-                                Console.WriteLine("Character Skin Tone: " + findChar.SkinTone);
-                                Console.WriteLine("Character Mass: " + findChar.Mass);
-                                Console.WriteLine("Character Class: " + findChar.Class);
-                                Console.WriteLine("Character Element: " + findChar.Element);
-                                Console.WriteLine("Character Faction: " + findChar.Faction);
-                                Console.WriteLine("Character Stats:");
-                                Console.WriteLine("\tStrength: " + findChar.Str);
-                                Console.WriteLine("\tAgility: " + findChar.Agi);
-                                Console.WriteLine("\tIntelligence: " + findChar.Int);
-                                Console.WriteLine("\tDexterity: " + findChar.Dex);
-                                Console.WriteLine("\tLuck: " + findChar.Luck);
-                                Console.WriteLine("Character Additional Features:");
-                                Console.WriteLine("\tCharacter Moustache: " + findChar.Moustache);
-                                Console.WriteLine("\tCharacter Beard: " + findChar.Beard);
-                                Console.WriteLine("\tCharacter Goatee: " + findChar.Goatee);
-                                Console.WriteLine("\tCharacter Headband: " + findChar.Headband);
-                                Console.WriteLine("\tCharacter Earrings: " + findChar.Earrings);
-                                Console.WriteLine("\tCharacter Necklace: " + findChar.Necklace);
-                                Console.WriteLine("\tCharacter Ring: " + findChar.Ring);
-
-
-                                Console.WriteLine("\n[1] Delete Character");
-                                Console.WriteLine("[2] Return to Character Menu");
-                                Console.WriteLine("[3] Return to Main Menu");
-                                Console.WriteLine("[4] Exit");
-                                Console.Write("Enter option: ");
-                                ansInt = Convert.ToInt32(Console.ReadLine());
-
-                                if (ansInt == 1)
+                                StoreCharInfo findChar = charInfo.Find(character => character.ID == ansInt);
+                                if (findChar != null)
                                 {
-                                    DelChar(findChar.ID);
-                                    charInfo.Remove(findChar);
-                                    while (error == true)
+                                    Console.WriteLine("Successfully loaded! ");
+                                    Console.WriteLine("\nCharacter Information:");
+
+                                    Console.WriteLine("Character Name: " + findChar.Name);
+                                    Console.WriteLine("Character Race: " + findChar.Race);
+                                    Console.WriteLine("Character Gender: " + findChar.Gender);
+                                    Console.WriteLine("Character Hairstyle: " + findChar.HairStyle);
+                                    Console.WriteLine("Character Haircolor: " + findChar.HairColor);
+                                    Console.WriteLine("Character Eyecolor: " + findChar.EyeColor);
+                                    Console.WriteLine("Character Skin Tone: " + findChar.SkinTone);
+                                    Console.WriteLine("Character Mass: " + findChar.Mass);
+                                    Console.WriteLine("Character Class: " + findChar.Class);
+                                    Console.WriteLine("Character Element: " + findChar.Element);
+                                    Console.WriteLine("Character Faction: " + findChar.Faction);
+                                    Console.WriteLine("Character Stats:");
+                                    Console.WriteLine("\tStrength: " + findChar.Str);
+                                    Console.WriteLine("\tAgility: " + findChar.Agi);
+                                    Console.WriteLine("\tIntelligence: " + findChar.Int);
+                                    Console.WriteLine("\tDexterity: " + findChar.Dex);
+                                    Console.WriteLine("\tLuck: " + findChar.Luck);
+                                    Console.WriteLine("Character Additional Features:");
+                                    Console.WriteLine("\tCharacter Moustache: " + findChar.Moustache);
+                                    Console.WriteLine("\tCharacter Beard: " + findChar.Beard);
+                                    Console.WriteLine("\tCharacter Goatee: " + findChar.Goatee);
+                                    Console.WriteLine("\tCharacter Headband: " + findChar.Headband);
+                                    Console.WriteLine("\tCharacter Earrings: " + findChar.Earrings);
+                                    Console.WriteLine("\tCharacter Necklace: " + findChar.Necklace);
+                                    Console.WriteLine("\tCharacter Ring: " + findChar.Ring);
+
+
+                                    Console.WriteLine("\n[1] Delete Character");
+                                    Console.WriteLine("[2] Return to Character Menu");
+                                    Console.WriteLine("[3] Return to Main Menu");
+                                    Console.WriteLine("[4] Exit");
+                                    Console.Write("Enter option: ");
+                                    ansInt = Convert.ToInt32(Console.ReadLine());
+
+                                    if (ansInt == 1)
                                     {
-                                        Console.Write("Return to Character Menu? [Y/N]: ");
-                                        string ans = Console.ReadLine();
-                                        if (ans.ToUpper().Equals("Y"))
+                                        DelChar(findChar.ID);
+                                        charInfo.Remove(findChar);
+                                        while (error == true)
                                         {
-                                            error = false;
-                                            Console.Clear();
-                                            LoadGame.LoadCharacter();
-                                            return;
-                                        }
-                                        else
-                                        {
-                                            Console.WriteLine("Exiting in 5 seconds...");
-                                            Thread.Sleep(5000);
-                                            System.Environment.Exit(0);
+                                            Console.Write("Return to Character Menu? [Y/N]: ");
+                                            string ans = Console.ReadLine();
+                                            if (ans.ToUpper().Equals("Y"))
+                                            {
+                                                error = false;
+                                                Console.Clear();
+                                                LoadGame.LoadCharacter();
+                                                return;
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine("Exiting in 5 seconds...");
+                                                Thread.Sleep(5000);
+                                                System.Environment.Exit(0);
+                                            }
                                         }
                                     }
+                                    else if (ansInt == 2)
+                                    {
+                                        Console.Clear();
+                                        LoadGame.LoadCharacter();
+                                        return;
+                                    }
+                                    else if (ansInt == 3)
+                                    {
+                                        Console.Clear();
+                                        return;
+                                    }
+                                    else if (ansInt == 4)
+                                    {
+                                        Console.WriteLine("Thank you for playing the game!");
+                                        Console.WriteLine("Exiting in 5 seconds...");
+                                        Thread.Sleep(5000);
+                                        System.Environment.Exit(0);
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Invalid option! Please try again.");
+                                    }
                                 }
-                                else if (ansInt == 2)
+                            }
+                            else
+                            {
+                                Console.WriteLine("No saved characters available in the game.");
+                                Console.Write("Return to Main menu? [Y/N]: ");
+                                string ans = Console.ReadLine();
+                                if (ans.ToUpper().Equals("Y"))
                                 {
                                     Console.Clear();
-                                    LoadGame.LoadCharacter();
                                     return;
                                 }
-                                else if (ansInt == 3)
+                                else
                                 {
-                                    Console.Clear();
-                                    return;
-                                }
-                                else if (ansInt == 4)
-                                {
-                                    Console.WriteLine("Thank you for playing the game!");
                                     Console.WriteLine("Exiting in 5 seconds...");
                                     Thread.Sleep(5000);
                                     System.Environment.Exit(0);
                                 }
-                                else
-                                {
-                                    Console.WriteLine("Invalid option! Please try again.");
-                                }
                             }
+                        }
+                        else if (DBans == "4")
+                        {
+                            Console.Clear();
+                            return;
                         }
                         else
                         {
-                            Console.WriteLine("No saved characters available in the game.");
-                            Console.Write("Return to Main menu? [Y/N]: ");
-                            string ans = Console.ReadLine();
-                            if (ans.ToUpper().Equals("Y"))
-                            {
-                                Console.Clear();
-                                return;
-                            }
-                            else
-                            {
-                                Console.WriteLine("Exiting in 5 seconds...");
-                                Thread.Sleep(5000);
-                                System.Environment.Exit(0);
-                            }
+                            Console.WriteLine("Invalid option! Please try again.");
+                            continue;
                         }
                     }
                 }
