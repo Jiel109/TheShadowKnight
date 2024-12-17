@@ -51,10 +51,12 @@ namespace TheShadowKnight
                 }
                 else if (ans.Equals("2"))
                 {
+                    Console.Clear();
                     LoadGame.LoadCharacter();
                 }
                 else if (ans.Equals("3"))
                 {
+                    Console.Clear();
                     CampaignMode.Campaign();
                     while (error == true)
                     {
@@ -82,6 +84,7 @@ namespace TheShadowKnight
                 }
                 else if (ans.Equals("4"))
                 {
+                    Console.Clear();
                     Credits.Cred();
                     while (error == true)
                     {

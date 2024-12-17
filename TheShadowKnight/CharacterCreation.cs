@@ -212,7 +212,14 @@ namespace TheShadowKnight
         public static void Character()
         {
             CharInfo Player = new CharInfo();
+            SqlConnection connection;
+            String connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=C:\Users\Admin\Desktop\st\3 1 SEM\Prog 3\TheShadowKnight-master\TheShadowKnight\CharacterDatabase.mdf;Integrated Security=True";
+            connection = new SqlConnection(connectionString);
+            connection.Open();
 
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("                        _____\r\n                        \\   /\r\n                        |   |\r\n           .__.         |   |_____________________________________________\r\n           |  |_________|   |                                              \\\r\n           |  |         |   |________________________________________________\\\r\n _____ _            _____ _               _                 _   __      _       _     _\r\n|_   _| |          /  ___| |             | |               | | / /     (_)     | |   | |\r\n  | | | |__   ___  \\ `--.| |__   __ _  __| | _____      __ | |/ / _ __  _  __ _| |__ | |_\r\n  | | | '_ \\ / _ \\  `--. | '_ \\ / _` |/ _` |/ _ \\ \\ /\\ / / |    \\| '_ \\| |/ _` | '_ \\| __|\r\n  | | | | | |  __/ /\\__/ | | | | (_| | (_| | (_) \\ V  V /  | |\\  | | | | | (_| | | | | |_\r\n  \\_/ |_| |_|\\___| \\____/|_| |_|\\__,_|\\__,_|\\___/ \\_/\\_/   \\_| \\_|_| |_|_|\\__, |_| |_|\\__|\r\n                             _____________________________________________ __/ |\r\n           |  |_________|   |                                             |___/\r\n           |__|         |   |_____________________________________________ /\r\n                        |   |\r\n                        |   |\r\n                        /___\\\n");
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("\nCREATE A NEW CHARACTER");
             try
             {
@@ -1035,10 +1042,6 @@ namespace TheShadowKnight
                 }
                 Player.setInfo(hasMoustache, hasBeard, hasGoatee, hasHeadband, hasEarrings, hasNecklace, hasRing);
 
-                SqlConnection connection;
-                String connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=C:\Users\Admin\Desktop\st\3 1 SEM\Prog 3\TheShadowKnight-master\TheShadowKnight\CharacterDatabase.mdf;Integrated Security=True";
-                connection = new SqlConnection(connectionString);
-                connection.Open();
                 try
                 {
                     String insertQueryDB = "INSERT INTO dbo.CHARACTER_INFO (char_name, char_race, char_gender, " +

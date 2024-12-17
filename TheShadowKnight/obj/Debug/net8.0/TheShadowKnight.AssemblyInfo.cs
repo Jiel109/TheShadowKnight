@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TheShadowKnight")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ac511684795e9b21b3c64fce590bf8cb35564670")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("TheShadowKnight")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TheShadowKnight")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
