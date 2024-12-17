@@ -1078,7 +1078,8 @@ namespace TheShadowKnight
                 Console.WriteLine("\nAn error has occured " + ex.Message);
                 Console.WriteLine("\nPress any key to continue");
                 ans1 = Console.ReadLine();
-                System.Environment.Exit(0);
+                Console.Clear();
+                return;
             }
         }
     }

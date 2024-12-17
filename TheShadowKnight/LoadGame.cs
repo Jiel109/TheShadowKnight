@@ -1,4 +1,4 @@
-using Microsoft.VisualBasic.FileIO;
+﻿using Microsoft.VisualBasic.FileIO;
 using System;
 using System.Collections;
 using System.Data.SqlClient;
@@ -345,6 +345,7 @@ namespace TheShadowKnight
                     Console.WriteLine("\nPress any key to continue");
                     ans1 = Console.ReadLine();
                     Console.Clear();
+                    return;
                 }
             }
         }
