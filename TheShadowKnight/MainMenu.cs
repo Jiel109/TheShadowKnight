@@ -24,6 +24,7 @@ namespace TheShadowKnight
 
                 if (ans.Equals("1"))
                 {
+                    Console.Clear();
                     CharacterCreation.Character();
                     while (error == true)
                     {
