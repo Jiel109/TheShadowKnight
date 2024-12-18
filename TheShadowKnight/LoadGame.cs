@@ -82,7 +82,43 @@ namespace TheShadowKnight
                     
                         if (DBans == "1")
                         {
+                            Console.WriteLine("Loaded Characters:");
+                            foreach (var save in charInfo)
+                            {
+                                Console.WriteLine("[" + save.ID + "] " + save.Name);
+                                StoreCharInfo findChar = charInfo.Find(character => character.ID == save.ID);
+                                if (findChar != null)
+                                {
+                                    Console.WriteLine("Character Information:");
 
+                                    Console.WriteLine("Character Name: " + findChar.Name);
+                                    Console.WriteLine("Character Race: " + findChar.Race);
+                                    Console.WriteLine("Character Gender: " + findChar.Gender);
+                                    Console.WriteLine("Character Hairstyle: " + findChar.HairStyle);
+                                    Console.WriteLine("Character Haircolor: " + findChar.HairColor);
+                                    Console.WriteLine("Character Eyecolor: " + findChar.EyeColor);
+                                    Console.WriteLine("Character Skin Tone: " + findChar.SkinTone);
+                                    Console.WriteLine("Character Mass: " + findChar.Mass);
+                                    Console.WriteLine("Character Class: " + findChar.Class);
+                                    Console.WriteLine("Character Element: " + findChar.Element);
+                                    Console.WriteLine("Character Faction: " + findChar.Faction);
+                                    Console.WriteLine("Character Stats:");
+                                    Console.WriteLine("\tStrength: " + findChar.Str);
+                                    Console.WriteLine("\tAgility: " + findChar.Agi);
+                                    Console.WriteLine("\tIntelligence: " + findChar.Int);
+                                    Console.WriteLine("\tDexterity: " + findChar.Dex);
+                                    Console.WriteLine("\tLuck: " + findChar.Luck);
+                                    Console.WriteLine("Character Additional Features:");
+                                    Console.WriteLine("\tCharacter Moustache: " + findChar.Moustache);
+                                    Console.WriteLine("\tCharacter Beard: " + findChar.Beard);
+                                    Console.WriteLine("\tCharacter Goatee: " + findChar.Goatee);
+                                    Console.WriteLine("\tCharacter Headband: " + findChar.Headband);
+                                    Console.WriteLine("\tCharacter Earrings: " + findChar.Earrings);
+                                    Console.WriteLine("\tCharacter Necklace: " + findChar.Necklace);
+                                    Console.WriteLine("\tCharacter Ring: " + findChar.Ring);
+                                    Console.WriteLine("\n");
+                                }
+                            }
                         }
                         else if (DBans == "2")
                         {
@@ -278,9 +314,8 @@ namespace TheShadowKnight
                                             }
                                             else
                                             {
-                                                Console.WriteLine("Exiting in 5 seconds...");
-                                                Thread.Sleep(5000);
-                                                System.Environment.Exit(0);
+                                                Console.Clear();
+                                                return;
                                             }
                                         }
                                     }
