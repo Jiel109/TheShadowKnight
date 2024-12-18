@@ -375,7 +375,7 @@ namespace TheShadowKnight
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("\nFailed to load existing characters.");
+                    Console.WriteLine("\nAn error has occured invalid input.");
                     Console.WriteLine(ex.Message);
                     Console.WriteLine("\nPress any key to continue");
                     ans1 = Console.ReadLine();
