@@ -21,7 +21,7 @@ namespace TheShadowKnight
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("\nLOAD GAME");
             SqlConnection connection;
-            String connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=C:\Users\Admin\Desktop\st\3 1 SEM\Prog 3\TheShadowKnight-master\TheShadowKnight\CharacterDatabase.mdf;Integrated Security=True";
+            String connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=C:\Users\Giyo\Desktop\TheShadowKnight-master\TheShadowKnight\CharacterDatabase.mdf;Integrated Security=True";
             String selectQueryDB = "SELECT * FROM dbo.CHARACTER_INFO";
 
             List<StoreCharInfo> charInfo = new List<StoreCharInfo>();
@@ -73,11 +73,11 @@ namespace TheShadowKnight
 
                     while (true)
                     {
-                        Console.WriteLine("[1] View All Character");
+                        Console.WriteLine("[1] View All Character(s)");
                         Console.WriteLine("[2] View Specific Character");
                         Console.WriteLine("[3] Delete a Character");
                         Console.WriteLine("[4] Return to Main Menu");
-                        Console.WriteLine("Enter Option: ");
+                        Console.Write("Enter Option: ");
                         DBans = Console.ReadLine();
                     
                         if (DBans == "1")
@@ -390,7 +390,7 @@ namespace TheShadowKnight
             string ans;
             SqlConnection connection;
 
-            String connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=C:\Users\Admin\Desktop\st\3 1 SEM\Prog 3\TheShadowKnight-master\TheShadowKnight\CharacterDatabase.mdf;Integrated Security=True";
+            String connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=C:\Users\Giyo\Desktop\TheShadowKnight-master\TheShadowKnight\CharacterDatabase.mdf;Integrated Security=True";
 
             using (connection = new SqlConnection(connectionString))
             {

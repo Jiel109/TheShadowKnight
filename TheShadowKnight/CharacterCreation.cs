@@ -213,7 +213,7 @@ namespace TheShadowKnight
         {
             CharInfo Player = new CharInfo();
             SqlConnection connection;
-            String connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=C:\Users\Admin\Desktop\st\3 1 SEM\Prog 3\TheShadowKnight-master\TheShadowKnight\CharacterDatabase.mdf;Integrated Security=True";
+            String connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=C:\Users\Giyo\Desktop\TheShadowKnight-master\TheShadowKnight\CharacterDatabase.mdf;Integrated Security=True";
             connection = new SqlConnection(connectionString);
             connection.Open();
 
@@ -247,7 +247,7 @@ namespace TheShadowKnight
                             reader.Read();
                             string existingName = reader["char_name"].ToString();
                             reader.Close();
-                            Console.WriteLine("The name \"" + charName + "\" is already taken. (" + existingName + ")");
+                            Console.WriteLine("The name \"" + existingName + "\" is already taken.");
                             continue;
                         }
 
@@ -792,7 +792,7 @@ namespace TheShadowKnight
                     Console.WriteLine("[4]Character Dexterity: " + charDex);
                     Console.WriteLine("[5]Character Luck: " + charLuck);
                     Console.WriteLine("Remaining points to be added in stats: " + maxStatsLimit);
-                    Console.WriteLine("Enter option: ");
+                    Console.Write("Enter option: ");
                     ans = Console.ReadLine();
                     if (ans.Equals("1"))
                     {
